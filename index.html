@@ -18,6 +18,21 @@
       color: #fff;
       padding: 20px;
       text-align: center;
+      position: relative;
+    }
+    .lang-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+    .lang-toggle button {
+      background: #ffffffcc;
+      color: #4a7c59;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
     }
     .container {
       padding: 20px;
@@ -53,6 +68,10 @@
       header, .container, footer {
         padding: 15px;
       }
+      .lang-toggle {
+        top: 10px;
+        right: 10px;
+      }
     }
   </style>
 </head>
@@ -61,6 +80,9 @@
   <header>
     <h1>Belle Auberge Inc.</h1>
     <p>Your Mont-Tremblant nature escape / Votre escapade nature à Mont-Tremblant</p>
+    <div class="lang-toggle">
+      <button id="langBtn">Fr</button>
+    </div>
   </header>
 
   <div class="container">
@@ -106,6 +128,29 @@
     <p>© 2025 Belle Auberge Inc. | Designed with nature in mind</p>
   </footer>
 
+  <script>
+    function setLanguage(lang) {
+      document.getElementById('english').style.display = lang === 'en' ? 'block' : 'none';
+      document.getElementById('french').style.display = lang === 'fr' ? 'block' : 'none';
+      document.getElementById('langBtn').innerText = lang === 'en' ? 'Fr' : 'En';
+      localStorage.setItem('preferredLanguage', lang);
+    }
+
+    // Load language preference
+    (function() {
+      let lang = localStorage.getItem('preferredLanguage');
+      if (!lang) {
+        const browserLang = navigator.language || navigator.userLanguage;
+        lang = browserLang.startsWith('fr') ? 'fr' : 'en';
+      }
+      setLanguage(lang);
+
+      document.getElementById('langBtn').addEventListener('click', () => {
+        const currentLang = document.getElementById('english').style.display === 'block' ? 'en' : 'fr';
+        setLanguage(currentLang === 'en' ? 'fr' : 'en');
+      });
+    })();
+  </script>
+
 </body>
 </html>
-
