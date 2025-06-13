@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Belle Auberge - Rooms</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <!-- Header Section -->
+  <header class="site-header">
+    <div class="header-left">
+      <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="Belle Auberge Logo">
+      </a>
+    </div>
+
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html" data-i18n="menuHome">Home</a>
+      <a href="rooms.html" data-i18n="menuRooms">Rooms</a>
+      <a href="booking.html" data-i18n="menuBooking">Booking</a>
+      <a href="tarif.html" data-i18n="menuTarif">Tarif</a>
+      <a href="#contact" data-i18n="menuContact">Contact</a>
+    </nav>
+
+    <div class="header-right">
+      <button class="lang-toggle" id="langBtn">Fr</button>
+      <button class="hamburger" id="hamburger">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- Hero Slideshow Section -->
+  <section class="rooms-hero">
+    <div class="slideshow-container">
+      <img class="slide" src="images/room1.jpg" alt="Room 1">
+      <img class="slide" src="images/room2.jpg" alt="Room 2">
+      <img class="slide" src="images/room3.jpg" alt="Room 3">
+      <img class="slide" src="images/room4.jpg" alt="Room 4">
+      <img class="slide" src="images/room5.jpg" alt="Room 5">
+      <img class="slide" src="images/room6.jpg" alt="Room 6">
+      <div class="slide-indicators" id="slideIndicators"></div>
+    </div>
+    <div class="rooms-info">
+      <h2 data-i18n="exploreTitle">What's Yours to Explore</h2>
+      <ul>
+        <li data-i18n="exploreLake">Lake Access: Canoe, paddle-board, and more</li>
+        <li data-i18n="exploreSpa">7-Person Spa</li>
+        <li data-i18n="exploreBackyard">Large backyard: BBQ, badminton, ping-pong, foosball, playground</li>
+        <li data-i18n="exploreView">Picturesque views: Surrounded by nature with lake view from patio</li>
+        <li data-i18n="exploreCharger">Electric car charger available</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
+  <div class="contact-container">
+    <div class="contact-info">
+      <h3 id="contactTitle">Contact</h3>
+      <p><strong data-i18n="labelCell">Cellphone:</strong> 5146326388</p>
+      <p><strong data-i18n="labelEmail">Email:</strong> bonnechancegw@yahoo.ca</p>
+      <p><strong data-i18n="labelAddress">Address:</strong> 2058 Chem. du Lac-Supérieur, Lac-Supérieur, Québec, Canada, J0T 1P0</p>
+    </div>
+    <div class="contact-social">
+      <h4 id="followUsTitle">Follow Us</h4>
+      <div class="social-links">
+        <a href="https://www.facebook.com" target="_blank">
+          <img src="images/Facebook.png" alt="Facebook" />
+        </a>
+        <a href="https://www.airbnb.ca/rooms/1401612893022718177?source_impression_id=p3_1749258723_P3g6wSzpDlf8fxfq" target="_blank">
+          <img src="images/Airbnb.png" alt="Airbnb" />
+        </a>
+        <a href="https://www.instagram.com" target="_blank">
+          <img src="images/Instagram.png" alt="Instagram" />
+        </a>
+        <a href="https://www.youtube.com" target="_blank">
+          <img src="images/Youtube.png" alt="Youtube" />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Footer Section -->
+  <footer class="site-footer">
+    <p>&copy; 2025 Belle Auberge Inc.</p>
+  </footer>
+
+  <script>
+    // Slideshow + indicators
+    const slides = document.querySelectorAll(".slide");
+    const indicatorContainer = document.getElementById("slideIndicators");
+    let slideIndex = 0;
+
+    // Create indicators dynamically
+    slides.forEach((_, i) => {
+      const dot = document.createElement("span");
+      dot.addEventListener("click", () => {
+        slideIndex = i;
+        showSlides();
+      });
+      indicatorContainer.appendChild(dot);
+    });
+
+    const dots = indicatorContainer.querySelectorAll("span");
+
+    function showSlides() {
+      slides.forEach((slide, i) => {
+        slide.style.display = i === slideIndex ? "block" : "none";
+        dots[i].classList.toggle("active", i === slideIndex);
+      });
+
+      slideIndex = (slideIndex + 1) % slides.length;
+      setTimeout(showSlides, 4000); // auto-advance
+    }
+
+    showSlides();
+
+    // Language toggle logic
+    const langBtn = document.getElementById("langBtn");
+    const userLang = localStorage.getItem("lang") || navigator.language.slice(0, 2);
+    setLanguage(userLang);
+
+    langBtn.addEventListener("click", () => {
+      const newLang = langBtn.textContent === "Fr" ? "fr" : "en";
+      setLanguage(newLang);
+    });
+
+    function setLanguage(lang) {
+      const strings = {
+        en: {
+          menuHome: "Home",
+          menuRooms: "Rooms",
+          menuBooking: "Booking",
+          menuTarif: "Tarif",
+          menuContact: "Contact",
+          exploreTitle: "What's Yours to Explore",
+          exploreLake: "Lake Access: Canoe, paddle-board, and more",
+          exploreSpa: "7-Person Spa",
+          exploreBackyard: "Large backyard: BBQ, badminton, ping-pong, foosball, playground",
+          exploreView: "Picturesque views: Surrounded by nature with lake view from patio",
+          exploreCharger: "Electric car charger available",
+          contact: "Contact",
+          cellphone: "Cellphone",
+          email: "Email",
+          address: "Address"
+        },
+        fr: {
+          menuHome: "Accueil",
+          menuRooms: "Chambres",
+          menuBooking: "Réservation",
+          menuTarif: "Tarifs",
+          menuContact: "Contact",
+          exploreTitle: "À découvrir chez vous",
+          exploreLake: "Accès au lac: canot, paddle board et plus",
+          exploreSpa: "Spa 7 places",
+          exploreBackyard: "Grande cour: BBQ, badminton, ping-pong, baby-foot, aire de jeux",
+          exploreView: "Vues pittoresques: entouré de nature avec vue sur le lac",
+          exploreCharger: "Borne de recharge électrique disponible",
+          contact: "Contact",
+          cellphone: "Téléphone",
+          email: "Courriel",
+          address: "Adresse"
+        }
+      };
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        el.textContent = strings[lang][key] || el.textContent;
+      });
+      langBtn.textContent = lang === "en" ? "Fr" : "En";
+      localStorage.setItem("lang", lang);
+    }
+    
+  </script>
+</body>
+</html>
