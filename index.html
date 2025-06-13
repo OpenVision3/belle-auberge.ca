@@ -189,6 +189,42 @@
   line-height: 1.6;
 }
 
+.activities {
+  padding: 40px 20px;
+  background: #f9f9f9;
+  text-align: center;
+}
+
+.activities h3 {
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  color: #4a7c59;
+}
+
+.activities-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.activity {
+  width: 120px;
+}
+
+.activity img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.activity p {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #333;
+}
+
+
     footer {
       background: #4a7c59;
       color: #fff;
@@ -254,6 +290,31 @@
   </div>
 </section>
 
+<section class="activities">
+  <h3 id="activitiesTitle">Activities</h3>
+  <div class="activities-grid">
+    <div class="activity">
+      <img src="images/Canoeing.jpg" alt="Canoeing" />
+      <p id="activityCanoeing">Canoeing</p>
+    </div>
+    <div class="activity">
+      <img src="images/Skiing.jpg" alt="Skiing" />
+      <p id="activitySkiing">Skiing</p>
+    </div>
+    <div class="activity">
+      <img src="images/Cycling.jpg" alt="Cycling" />
+      <p id="activityCycling">Cycling</p>
+    </div>
+    <div class="activity">
+      <img src="images/Hiking.jpg" alt="Hiking" />
+      <p id="activityHiking">Hiking</p>
+    </div>
+    <div class="activity">
+      <img src="images/Fishing.jpg" alt="Fishing" />
+      <p id="activityFishing">Fishing</p>
+    </div>
+  </div>
+</section>
 
 <footer>
   <p>© 2025 Belle Auberge Inc. | Designed with nature in mind</p>
@@ -270,7 +331,13 @@
       heroSubtitle: 'Escape to a charming 5-bedroom retreat just a 1-minute walk from <strong>Lac-Supérieur</strong> and 5 minutes from the <strong>north side of Mont-Tremblant</strong>.',
       heroButton: 'Book Now',
       locationTitle: "About Belle Auberge",
-      locationText: "Just steps away from Lac-Supérieur and minutes from Mont-Tremblant's north side, this 5-bedroom chalet is ideal for families and groups seeking tranquility and recreation, accommodating up to 16 guests."
+      locationText: "Just steps away from Lac-Supérieur and minutes from Mont-Tremblant's north side, this 5-bedroom chalet is ideal for families and groups seeking tranquility and recreation, accommodating up to 16 guests.",
+    activitiesTitle: "Activities",
+  activityCanoeing: "Canoeing",
+  activitySkiing: "Skiing",
+  activityCycling: "Cycling",
+  activityHiking: "Hiking",
+  activityFishing: "Fishing"
     },
     fr: {
       langBtn: 'En',
@@ -281,7 +348,13 @@
       heroSubtitle: 'Évadez-vous dans un refuge charmant de 5 chambres à coucher, à seulement 1 minute à pied du <strong>Lac-Supérieur</strong> et à 5 minutes du <strong>versant nord du Mont-Tremblant</strong>.',
       heroButton: 'Réserver',
       locationTitle: "À propos de Belle Auberge",
-      locationText: "À quelques pas du Lac-Supérieur et à quelques minutes du versant nord du Mont-Tremblant, ce chalet de 5 chambres est idéal pour les familles et les groupes en quête de tranquillité et de loisirs, pouvant accueillir jusqu'à 16 personnes."
+      locationText: "À quelques pas du Lac-Supérieur et à quelques minutes du versant nord du Mont-Tremblant, ce chalet de 5 chambres est idéal pour les familles et les groupes en quête de tranquillité et de loisirs, pouvant accueillir jusqu'à 16 personnes.",
+    activitiesTitle: "Activités",
+  activityCanoeing: "Canotage",
+  activitySkiing: "Ski",
+  activityCycling: "Cyclisme",
+  activityHiking: "Randonnée",
+  activityFishing: "Pêche"
     }
   };
 
@@ -296,6 +369,12 @@
     document.getElementById('heroButton').innerText = data.heroButton;
     document.getElementById('locationTitle').innerText = data.locationTitle;
     document.getElementById('locationText').innerText = data.locationText;
+document.getElementById('activitiesTitle').innerText = data.activitiesTitle;
+document.getElementById('activityCanoeing').innerText = data.activityCanoeing;
+document.getElementById('activitySkiing').innerText = data.activitySkiing;
+document.getElementById('activityCycling').innerText = data.activityCycling;
+document.getElementById('activityHiking').innerText = data.activityHiking;
+document.getElementById('activityFishing').innerText = data.activityFishing;
 
     localStorage.setItem('preferredLanguage', lang);
   }
