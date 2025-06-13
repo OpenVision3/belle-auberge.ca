@@ -297,7 +297,8 @@
   </div>
   <nav>
     <a href="index.html" id="navHome">Home</a>
-    <a href="rooms.html" id="navRooms">Rooms Booking</a>
+    <a href="rooms.html" id="navRooms">Rooms</a>
+    <a href="booking.html" id="navBooking">Booking</a>
     <a href="tarif.html" id="navTarif">Tarif</a>
     <a href="#contact" data-i18n="menuContact">Contact</a>
   </nav>
@@ -370,9 +371,9 @@
   <div class="contact-container">
     <div class="contact-info">
       <h3 id="contactTitle">Contact</h3>
-      <p><strong>Cellphone:</strong> 5146326388</p>
-      <p><strong>Email:</strong> bonnechancegw@yahoo.ca</p>
-      <p><strong>Address:</strong> 2058 Chem. du Lac-Supérieur, Lac-Supérieur, Québec, Canada, J0T 1P0</p>
+      <p><strong data-i18n="labelCell">Cellphone:</strong> 5146326388</p>
+      <p><strong data-i18n="labelEmail">Email:</strong> bonnechancegw@yahoo.ca</p>
+      <p><strong data-i18n="labelAddress">Address:</strong> 2058 Chem. du Lac-Supérieur, Lac-Supérieur, Québec, Canada, J0T 1P0</p>
     </div>
     <div class="contact-social">
       <h4 id="followUsTitle">Follow Us</h4>
@@ -401,7 +402,8 @@
     en: {
       langBtn: 'Fr',
       navHome: 'Home',
-      navRooms: 'Rooms Booking',
+      navRooms: 'Rooms',
+      navBooking: 'Booking',
       navTarif: 'Tarif',
       heroTitle: '🇬🇧 Welcome',
       heroSubtitle: 'Escape to a charming 5-bedroom retreat just a 1-minute walk from <strong>Lac-Supérieur</strong> and 5 minutes from the <strong>north side of Mont-Tremblant</strong>.',
@@ -416,12 +418,16 @@
       activityFishing: "Fishing",
       menuContact: "Contact",
       contactTitle: "Contact",
-      followUsTitle: "Follow Us"
+      followUsTitle: "Follow Us",
+      labelCell: "Cellphone",
+      labelEmail: "Email",
+      labelAddress: "Address"
     },
     fr: {
       langBtn: 'En',
       navHome: 'Accueil',
-      navRooms: 'Réservation',
+      navRooms: 'Chambres',
+      navBooking: 'Réservation',
       navTarif: 'Tarifs',
       heroTitle: '🇫🇷 Bienvenue',
       heroSubtitle: 'Évadez-vous dans un refuge charmant de 5 chambres à coucher, à seulement 1 minute à pied du <strong>Lac-Supérieur</strong> et à 5 minutes du <strong>versant nord du Mont-Tremblant</strong>.',
@@ -436,7 +442,10 @@
       activityFishing: "Pêche",
       menuContact: "Contact",
       contactTitle: "Contact",
-      followUsTitle: "Suivez-nous"
+      followUsTitle: "Suivez-nous",
+      labelCell: "Téléphone",
+      labelEmail: "Courriel",
+      labelAddress: "Adresse"
     }
   };
 
@@ -445,6 +454,7 @@
     document.getElementById('langBtn').innerText = data.langBtn;
     document.getElementById('navHome').innerText = data.navHome;
     document.getElementById('navRooms').innerText = data.navRooms;
+    document.getElementById('navBooking').innerText = data.navBooking;
     document.getElementById('navTarif').innerText = data.navTarif;
     document.getElementById('heroTitle').innerText = data.heroTitle;
     document.getElementById('heroSubtitle').innerHTML = data.heroSubtitle;
@@ -460,6 +470,9 @@
     document.querySelector('[data-i18n="menuContact"]').innerText = data.menuContact;
     document.getElementById('contactTitle').innerText = data.contactTitle;
     document.getElementById('followUsTitle').innerText = data.followUsTitle;
+    document.querySelector('[data-i18n="labelCell"]').innerText = data.labelCell + ":";
+    document.querySelector('[data-i18n="labelEmail"]').innerText = data.labelEmail + ":";
+    document.querySelector('[data-i18n="labelAddress"]').innerText = data.labelAddress + ":";
     localStorage.setItem('preferredLanguage', lang);
   }
 
