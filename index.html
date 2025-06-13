@@ -151,6 +151,43 @@
     .indicator.active {
       background: white;
     }
+.location {
+  padding: 40px 20px;
+  background: #fff;
+  color: #333;
+}
+
+.location-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 30px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.location-map img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.location-description {
+  flex: 1;
+  min-width: 280px;
+}
+
+.location-description h3 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #4a7c59;
+}
+
+.location-description p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
 
     footer {
       background: #4a7c59;
@@ -201,6 +238,23 @@
 
 </section>
 
+<section class="location">
+  <div class="location-container">
+    <div class="location-map">
+      <img src="images/map.jpg" alt="Map to Belle Auberge" />
+    </div>
+    <div class="location-description">
+      <h3 id="locationTitle">About Belle Auberge</h3>
+      <p id="locationText">
+        Just steps away from Lac-Supérieur and minutes from Mont-Tremblant's north side,
+        this 5-bedroom chalet is ideal for families and groups seeking tranquility and
+        recreation, accommodating up to 16 guests.
+      </p>
+    </div>
+  </div>
+</section>
+
+
 <footer>
   <p>© 2025 Belle Auberge Inc. | Designed with nature in mind</p>
 </footer>
@@ -214,7 +268,9 @@
       navTarif: 'Tarif',
       heroTitle: '🇬🇧 Welcome',
       heroSubtitle: 'Escape to a charming 5-bedroom retreat just a 1-minute walk from <strong>Lac-Supérieur</strong> and 5 minutes from the <strong>north side of Mont-Tremblant</strong>.',
-      heroButton: 'Book Now'
+      heroButton: 'Book Now',
+      locationTitle: "About Belle Auberge",
+      locationText: "Just steps away from Lac-Supérieur and minutes from Mont-Tremblant's north side, this 5-bedroom chalet is ideal for families and groups seeking tranquility and recreation, accommodating up to 16 guests."
     },
     fr: {
       langBtn: 'En',
@@ -223,7 +279,9 @@
       navTarif: 'Tarifs',
       heroTitle: '🇫🇷 Bienvenue',
       heroSubtitle: 'Évadez-vous dans un refuge charmant de 5 chambres à coucher, à seulement 1 minute à pied du <strong>Lac-Supérieur</strong> et à 5 minutes du <strong>versant nord du Mont-Tremblant</strong>.',
-      heroButton: 'Réserver'
+      heroButton: 'Réserver',
+      locationTitle: "À propos de Belle Auberge",
+      locationText: "À quelques pas du Lac-Supérieur et à quelques minutes du versant nord du Mont-Tremblant, ce chalet de 5 chambres est idéal pour les familles et les groupes en quête de tranquillité et de loisirs, pouvant accueillir jusqu'à 16 personnes."
     }
   };
 
@@ -236,6 +294,9 @@
     document.getElementById('heroTitle').innerText = data.heroTitle;
     document.getElementById('heroSubtitle').innerHTML = data.heroSubtitle;
     document.getElementById('heroButton').innerText = data.heroButton;
+    document.getElementById('locationTitle').innerText = data.locationTitle;
+    document.getElementById('locationText').innerText = data.locationText;
+
     localStorage.setItem('preferredLanguage', lang);
   }
 
