@@ -13,7 +13,6 @@
       color: #333;
     }
 
-    /* Header / Navigation */
     header {
       background: #4a7c59;
       color: #fff;
@@ -23,26 +22,26 @@
       justify-content: space-between;
       flex-wrap: wrap;
     }
-    .logo {
-      display: flex;
-      align-items: center;
-    }
+
     .logo img {
       height: 40px;
-      margin-right: 10px;
     }
+
     nav {
       display: flex;
       gap: 15px;
     }
+
     nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
     }
+
     nav a:hover {
       text-decoration: underline;
     }
+
     .lang-toggle button {
       background: #ffffffcc;
       color: #4a7c59;
@@ -53,32 +52,104 @@
       font-weight: bold;
     }
 
-    .container {
-      padding: 20px;
-      max-width: 960px;
-      margin: auto;
-      background: #fff;
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 60vh;
+      overflow: hidden;
     }
 
-    h2 {
-      color: #4a7c59;
+    .hero img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
     }
 
-    ul {
-      list-style: none;
-      padding-left: 0;
+    .hero img.active {
+      opacity: 1;
     }
 
-    ul li::before {
-      content: "• ";
-      color: #4a7c59;
+.hero-info {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 16px;
+  border-radius: 10px;
+  max-width: 420px; /* 控制大约三行字幕宽度 */
+  color: white;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+.hero-info h2 {
+  margin: 0 0 10px;
+  font-size: 1.4rem;
+}
+
+.hero-info .button {
+  display: inline-block;
+  background: #ffcc00;
+  color: #333;
+  padding: 8px 16px;
+  font-size: 1rem;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.hero-info .button:hover {
+  background: #f4b400;
+}
+
+.hero-subtitle {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+    .hero-content h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5em;
     }
 
-    .contact {
-      background: #eeeeee;
-      padding: 15px;
-      margin-top: 20px;
-      border-radius: 6px;
+    .hero-content a.button {
+      display: inline-block;
+      background: #ffcc00;
+      color: #333;
+      padding: 12px 24px;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .hero-content a.button:hover {
+      background: #f4b400;
+    }
+
+    .indicators {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.6);
+      cursor: pointer;
+    }
+
+    .indicator.active {
+      background: white;
     }
 
     footer {
@@ -88,108 +159,128 @@
       padding: 10px;
       margin-top: 40px;
     }
-
-    @media (max-width: 600px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      nav {
-        margin-top: 10px;
-        flex-direction: column;
-        gap: 5px;
-      }
-    }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="logo">
-      <img src="images/logo.png" alt="Belle Auberge Logo">
-      <strong>Belle Auberge Inc.</strong>
-    </div>
-    <nav>
-      <a href="index.html" id="navHome">Home</a>
-      <a href="rooms.html" id="navRooms">Rooms Booking</a>
-      <a href="tarif.html" id="navTarif">Tarif</a>
-    </nav>
-    <div class="lang-toggle">
-      <button id="langBtn">Fr</button>
-    </div>
-  </header>
-
-  <div class="container">
-    <section id="english">
-      <h2>🇬🇧 Welcome</h2>
-      <p>Escape to a charming 5-bedroom retreat just a 1-minute walk from <strong>Lac-Supérieur</strong> and 5 minutes from the <strong>north side of Mont-Tremblant</strong>.</p>
-      <ul>
-        <li>🌊 Lake Access: Canoe, paddle-board, and more</li>
-        <li>🧖‍♀️ 7-person Spa</li>
-        <li>🛏️ Sleeps up to 16 guests: 2x2-person rooms, 2x3-person rooms, 1 suite for 4–5 guests</li>
-        <li>🍖 BBQ, full kitchen, and large yard</li>
-        <li>🏸 Games: Badminton, ping-pong, foosball, playground</li>
-        <li>🌲 Surrounded by nature with lake view from patio</li>
-        <li>🔌 Electric car charger</li>
-      </ul>
-      <p><strong>Ideal for families or groups seeking tranquility and fun.</strong></p>
-    </section>
-
-    <section id="french">
-      <h2>🇫🇷 Bienvenue</h2>
-      <p>Évadez-vous dans un refuge charmant de 5 chambres à coucher, à seulement 1 minute à pied du <strong>Lac-Supérieur</strong> et à 5 minutes du <strong>versant nord du Mont-Tremblant</strong>.</p>
-      <ul>
-        <li>🌊 Accès au lac: canot, planche à pagaie et plus</li>
-        <li>🧖‍♀️ Spa pour 7 personnes</li>
-        <li>🛏️ Capacité: jusqu’à 16 personnes (2x2 personnes, 2x3 personnes, 1 suite de 4–5 personnes)</li>
-        <li>🍖 BBQ, cuisine complète et grande cour</li>
-        <li>🏸 Activités: badminton, ping-pong, babyfoot, aire de jeux</li>
-        <li>🌲 Entouré par la nature avec vue sur le lac depuis le patio</li>
-        <li>🔌 Borne de recharge pour voiture électrique</li>
-      </ul>
-      <p><strong>Parfait pour les familles ou groupes à la recherche de calme et de plaisir.</strong></p>
-    </section>
-
-    <div class="contact">
-      <h3>📍 Contact</h3>
-      <p><strong>Address:</strong> 2058 Chem. du Lac-Supérieur, Lac-Supérieur, Québec, Canada, J0T 1P0</p>
-      <p><strong>Email:</strong> <a href="mailto:bonnechancegw@yahoo.ca">bonnechancegw@yahoo.ca</a></p>
-      <p><strong>Cell:</strong> <a href="tel:5146326388">514-632-6388</a></p>
-    </div>
+<header>
+  <div class="logo">
+    <img src="images/logo.png" alt="Belle Auberge Logo">
   </div>
+  <nav>
+    <a href="index.html" id="navHome">Home</a>
+    <a href="rooms.html" id="navRooms">Rooms Booking</a>
+    <a href="tarif.html" id="navTarif">Tarif</a>
+  </nav>
+  <div class="lang-toggle">
+    <button id="langBtn">Fr</button>
+  </div>
+</header>
 
-  <footer>
-    <p>© 2025 Belle Auberge Inc. | Designed with nature in mind</p>
-  </footer>
+<section class="hero">
+  <img src="images/hero1.jpg" class="active" />
+  <img src="images/hero2.jpg" />
+  <img src="images/hero3.jpg" />
+  <img src="images/hero4.jpg" />
+  <img src="images/hero5.jpg" />
+  <img src="images/hero6.jpg" />
+  <img src="images/hero7.jpg" />
+  <img src="images/hero8.jpg" />
+<div class="hero-info">
+  <div class="hero-content">
+    <h2 id="heroTitle">🇬🇧 Welcome</h2>
+    <a href="booking.html" class="button" id="heroButton">Book Now</a>
+  </div>
+  <div class="hero-subtitle" id="heroSubtitle">
+    Escape to a charming 5-bedroom retreat just a 1-minute walk from <strong>Lac-Supérieur</strong> and 5 minutes from the <strong>north side of Mont-Tremblant</strong>.
+  </div>
+  
+</div>
+<div class="indicators" id="indicators"></div>
+</div>
 
-  <script>
-    function setLanguage(lang) {
-      document.getElementById('english').style.display = lang === 'en' ? 'block' : 'none';
-      document.getElementById('french').style.display = lang === 'fr' ? 'block' : 'none';
-      document.getElementById('langBtn').innerText = lang === 'en' ? 'Fr' : 'En';
+</section>
 
-      // Optionally update menu labels based on language
-      document.getElementById('navHome').innerText = lang === 'en' ? 'Home' : 'Accueil';
-      document.getElementById('navRooms').innerText = lang === 'en' ? 'Rooms Booking' : 'Réservation';
-      document.getElementById('navTarif').innerText = lang === 'en' ? 'Tarif' : 'Tarifs';
+<footer>
+  <p>© 2025 Belle Auberge Inc. | Designed with nature in mind</p>
+</footer>
 
-      localStorage.setItem('preferredLanguage', lang);
+<script>
+  const langData = {
+    en: {
+      langBtn: 'Fr',
+      navHome: 'Home',
+      navRooms: 'Rooms Booking',
+      navTarif: 'Tarif',
+      heroTitle: '🇬🇧 Welcome',
+      heroSubtitle: 'Escape to a charming 5-bedroom retreat just a 1-minute walk from <strong>Lac-Supérieur</strong> and 5 minutes from the <strong>north side of Mont-Tremblant</strong>.',
+      heroButton: 'Book Now'
+    },
+    fr: {
+      langBtn: 'En',
+      navHome: 'Accueil',
+      navRooms: 'Réservation',
+      navTarif: 'Tarifs',
+      heroTitle: '🇫🇷 Bienvenue',
+      heroSubtitle: 'Évadez-vous dans un refuge charmant de 5 chambres à coucher, à seulement 1 minute à pied du <strong>Lac-Supérieur</strong> et à 5 minutes du <strong>versant nord du Mont-Tremblant</strong>.',
+      heroButton: 'Réserver'
     }
+  };
 
-    (function() {
-      let lang = localStorage.getItem('preferredLanguage');
-      if (!lang) {
-        const browserLang = navigator.language || navigator.userLanguage;
-        lang = browserLang.startsWith('fr') ? 'fr' : 'en';
-      }
-      setLanguage(lang);
+  function setLanguage(lang) {
+    const data = langData[lang];
+    document.getElementById('langBtn').innerText = data.langBtn;
+    document.getElementById('navHome').innerText = data.navHome;
+    document.getElementById('navRooms').innerText = data.navRooms;
+    document.getElementById('navTarif').innerText = data.navTarif;
+    document.getElementById('heroTitle').innerText = data.heroTitle;
+    document.getElementById('heroSubtitle').innerHTML = data.heroSubtitle;
+    document.getElementById('heroButton').innerText = data.heroButton;
+    localStorage.setItem('preferredLanguage', lang);
+  }
 
-      document.getElementById('langBtn').addEventListener('click', () => {
-        const currentLang = document.getElementById('english').style.display === 'block' ? 'en' : 'fr';
-        setLanguage(currentLang === 'en' ? 'fr' : 'en');
-      });
-    })();
-  </script>
+  (function () {
+    let lang = localStorage.getItem('preferredLanguage');
+    if (!lang) {
+      const browserLang = navigator.language || navigator.userLanguage;
+      lang = browserLang.startsWith('fr') ? 'fr' : 'en';
+    }
+    setLanguage(lang);
+
+    document.getElementById('langBtn').addEventListener('click', () => {
+      const newLang = document.getElementById('langBtn').innerText.toLowerCase() === 'fr' ? 'fr' : 'en';
+      setLanguage(newLang);
+    });
+  })();
+
+  // Slideshow + indicators
+  const images = document.querySelectorAll('.hero img');
+  const indicators = document.getElementById('indicators');
+  let current = 0;
+
+  function updateSlide(index) {
+    images.forEach((img, i) => img.classList.toggle('active', i === index));
+    document.querySelectorAll('.indicator').forEach((dot, i) =>
+      dot.classList.toggle('active', i === index)
+    );
+    current = index;
+  }
+
+  function nextSlide() {
+    const next = (current + 1) % images.length;
+    updateSlide(next);
+  }
+
+  images.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.classList.add('indicator');
+    if (i === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => updateSlide(i));
+    indicators.appendChild(dot);
+  });
+
+  setInterval(nextSlide, 4000);
+</script>
 
 </body>
 </html>
