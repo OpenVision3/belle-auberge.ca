@@ -23,6 +23,113 @@
       flex-wrap: wrap;
     }
 
+    /* Header Base */
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #4a7c59;
+      padding: 10px 20px;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    /* Logo */
+    .logo img {
+      height: 50px;
+    }
+
+    /* 右上角控制区域 */
+    .right-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Navigation */
+    .main-nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    .main-nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+
+    .main-nav a:hover {
+      color: #d4f1c5;
+    }
+
+    /* Language Toggle */
+    .lang-toggle button {
+      background-color: white;
+      color: #4a7c59;
+      border: none;
+      padding: 6px 12px;
+      font-size: 0.9rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .lang-toggle button:hover {
+      background-color: #d4f1c5;
+    }
+
+    /* Hamburger Icon */
+    .hamburger {
+      display: none;
+      font-size: 28px;
+      color: white;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+
+      .main-nav {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background-color: #4a7c59;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        width: 100%;
+        display: none;
+      }
+
+      .main-nav a {
+        padding: 15px 20px;
+        width: 100%;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .main-nav.show {
+        display: flex;
+      }
+
+      .lang-toggle {
+        position: absolute;
+        top: 10px;
+        right: 70px;
+      }
+      .right-controls {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+      }
+    }
+
     .logo img {
       height: 40px;
     }
@@ -55,7 +162,7 @@
     .hero {
       position: relative;
       width: 100%;
-      height: 90vh;
+      height: 80vh;
       overflow: hidden;
     }
 
@@ -64,6 +171,10 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center;  /* 以图片中心为焦点 */
+      top: 0;
+      left: 0;
+      z-index: -1;
       opacity: 0;
       transition: opacity 1s ease-in-out;
     }
@@ -79,7 +190,7 @@
       background: rgba(0, 0, 0, 0.5);
       padding: 16px;
       border-radius: 10px;
-      max-width: 420px; /* 控制大约三行字幕宽度 */
+      max-width: 300px; /* 控制大约三行字幕宽度 */
       color: white;
       text-shadow: 0 2px 4px rgba(0,0,0,0.8);
     }
@@ -291,19 +402,26 @@
   </style>
 </head>
 <body>
-<header>
+<header class="site-header">
   <div class="logo">
-    <img src="images/logo.png" alt="Belle Auberge Logo">
+    <a href="index.html">
+      <img src="images/logo.png" alt="Belle Auberge Logo">
+    </a>
   </div>
-  <nav>
-    <a href="index.html" id="navHome">Home</a>
-    <a href="rooms.html" id="navRooms">Rooms</a>
-    <a href="booking.html" id="navBooking">Booking</a>
-    <a href="tarif.html" id="navTarif">Tarif</a>
-    <a href="#contact" data-i18n="menuContact">Contact</a>
+
+  <!-- Navigation Menu -->
+  <nav class="main-nav" id="mainNav">
+    <a href="index.html" id="navHome" data-i18n="menuHome">Home</a>
+    <a href="rooms.html" id="navRooms" data-i18n="menuRooms">Rooms</a>
+    <a href="booking.html" id="navBooking" data-i18n="menuBooking">Booking</a>
+    <a href="tarif.html" id="navTarif" data-i18n="menuTarif">Tarif</a>
+    <a href="#contact" id="navContact" data-i18n="menuContact">Contact</a>
   </nav>
-  <div class="lang-toggle">
-    <button id="langBtn">Fr</button>
+
+  <!-- Hamburger icon -->
+  <div class="right-controls">
+    <button class="lang-toggle" id="langBtn">Fr</button>
+    <button class="hamburger" id="hamburger" aria-label="Toggle Menu">&#9776;</button>
   </div>
 </header>
 <section class="hero">
@@ -517,6 +635,9 @@
   });
 
   setInterval(nextSlide, 4000);
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mainNav').classList.toggle('show');
+  });
 </script>
 
 </body>
