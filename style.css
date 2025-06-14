@@ -32,7 +32,8 @@ header {
 
 /* Logo */
 .logo img {
-  height: 50px;
+  height: 100px;
+  filter: brightness(0) invert(1);
 }
 
 /* 右上角控制区域 */
@@ -122,10 +123,11 @@ header {
     top: 15px;
     right: 20px;
   }
-}
 
-.logo img {
-  height: 40px;
+  .logo img {
+    height: 50px;
+    filter: brightness(0) invert(1);
+  }
 }
 
 nav {
@@ -168,7 +170,7 @@ nav a:hover {
   flex-wrap: wrap;
   justify-content: center;
   align-items: stretch;
-  background-color: #f4f4f4;
+  background-color: #ecf0f1;
   gap: 40px;
 }
 
@@ -301,6 +303,7 @@ nav a:hover {
 
 .contact {
   background: #4a7c59;
+  color: #fff;
   padding: 20px 20px;
 }
 
