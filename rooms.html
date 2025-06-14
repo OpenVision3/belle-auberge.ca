@@ -185,6 +185,20 @@
       langBtn.textContent = lang === "en" ? "Fr" : "En";
       localStorage.setItem("lang", lang);
     }
+
+    (function () {
+      let lang = localStorage.getItem('preferredLanguage');
+      if (!lang) {
+        const browserLang = navigator.language || navigator.userLanguage;
+        lang = browserLang.startsWith('fr') ? 'fr' : 'en';
+      }
+      setLanguage(lang);
+
+      document.getElementById('langBtn').addEventListener('click', () => {
+        const newLang = document.getElementById('langBtn').innerText.toLowerCase() === 'fr' ? 'fr' : 'en';
+        setLanguage(newLang);
+      });
+    })();
     
     const rooms = [
     {
