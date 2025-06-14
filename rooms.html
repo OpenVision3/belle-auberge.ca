@@ -53,6 +53,20 @@
     </div>
   </section>
 
+  <section class="room-selector-section">
+  <div class="room-tabs">
+    <button class="room-tab active" data-index="0">Bedroom 1</button>
+    <button class="room-tab" data-index="1">Bedroom 2</button>
+    <button class="room-tab" data-index="2">Bedroom 3</button>
+    <button class="room-tab" data-index="3">Bedroom 4</button>
+    <button class="room-tab" data-index="4">Bedroom 5</button>
+  </div>
+
+  <div class="room-content-wrapper" id="roomContentWrapper">
+    <!-- JS will inject image + text here -->
+  </div>
+</section>
+
   <!-- Contact Section -->
   <section class="contact" id="contact">
   <div class="contact-container">
@@ -172,6 +186,99 @@
       localStorage.setItem("lang", lang);
     }
     
+    const rooms = [
+    {
+      title: "Bedroom 1",
+      subtitle: "(3 persons room)",
+      desc: "Suit with tub and bathroom. Ideal for small families or close friends, private and relaxing.",
+      images: ["room1_1.jpg", "room1_2.jpg", "room1_3.jpg", "room1_4.jpg"]
+    },
+    {
+      title: "Bedroom 2",
+      subtitle: "(1-2 persons room)",
+      desc: "One king bed. Cozy and peaceful, perfect for couples seeking rest.",
+      images: ["room2_1.jpg", "room2_2.jpg"]
+    },
+    {
+      title: "Bedroom 3",
+      subtitle: "(3 persons room)",
+      desc: "One queen and one single bed. Great for groups of friends or small family.",
+      images: ["room3_1.jpg"]
+    },
+    {
+      title: "Bedroom 4",
+      subtitle: "(1-2 persons room)",
+      desc: "One king bed. Simple and elegant, with a forest view.",
+      images: ["room4_1.jpg"]
+    },
+    {
+      title: "Bedroom 5",
+      subtitle: "(3 persons room)",
+      desc: "Includes baby bed. Family-friendly with plenty of space.",
+      images: ["room5_1.jpg", "room5_2.jpg", "room5_3.jpg", "room5_4.jpg", "room5_5.jpg"]
+    }
+  ];
+
+  let currentRoomIndex = 0;
+  let currentSlideIndex = 0;
+
+  const tabs = document.querySelectorAll(".room-tab");
+  const wrapper = document.getElementById("roomContentWrapper");
+
+  function updateRoom(index) {
+    currentRoomIndex = index;
+    currentSlideIndex = 0;
+
+    tabs.forEach(tab => tab.classList.remove("active"));
+    tabs[index].classList.add("active");
+
+    const room = rooms[index];
+
+    // alternate image/description layout
+    const isImageLeft = index % 2 === 0;
+
+    const imageSlider = `
+      <div class="room-image-slider">
+        <button class="room-arrow left" onclick="prevSlide()">
+          <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+        <img id="roomSlide" src="images/${room.images[0]}" alt="${room.title}">
+        <button class="room-arrow right" onclick="nextSlide()">
+          <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/>
+        </button>
+      </div>
+    `;
+
+    const description = `
+      <div class="room-description">
+        <h3>${room.title}</h3>
+        <h4>${room.subtitle}</h4>
+        <p>${room.desc}</p>
+      </div>
+    `;
+
+    wrapper.innerHTML = isImageLeft
+      ? imageSlider + description
+      : description + imageSlider;
+  }
+
+  function nextSlide() {
+    const images = rooms[currentRoomIndex].images;
+    currentSlideIndex = (currentSlideIndex + 1) % images.length;
+    document.getElementById("roomSlide").src = "images/" + images[currentSlideIndex];
+  }
+
+  function prevSlide() {
+    const images = rooms[currentRoomIndex].images;
+    currentSlideIndex = (currentSlideIndex - 1 + images.length) % images.length;
+    document.getElementById("roomSlide").src = "images/" + images[currentSlideIndex];
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => updateRoom(parseInt(tab.dataset.index)));
+  });
+
+  updateRoom(0); // initial load
   </script>
 </body>
 </html>
