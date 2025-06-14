@@ -22,12 +22,134 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
   </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <header class="site-header">
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/logo.png" alt="Belle Auberge Logo">
+      </a>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html" id="navHome" data-i18n="menuHome">Home</a>
+      <a href="rooms.html" id="navRooms" data-i18n="menuRooms">Rooms</a>
+      <a href="booking.html" id="navBooking" data-i18n="menuBooking">Booking</a>
+      <a href="tarif.html" id="navTarif" data-i18n="menuTarif">Tarif</a>
+      <a href="#contact" id="navContact" data-i18n="menuContact">Contact</a>
+    </nav>
+
+    <!-- Hamburger icon -->
+    <div class="right-controls">
+      <button class="lang-toggle" id="langBtn">Fr</button>
+      <button class="hamburger" id="hamburger" aria-label="Toggle Menu">&#9776;</button>
+    </div>
+  </header>
   <div class="form-container">
-    <h1>房间预订</h1>
-    <iframe src="https://script.google.com/macros/s/AKfycbyuxlZG0Byfqvy-AwCXnPewPU6dkX5MU6TqRmKQSW4_1angel2YfLxai-C8NDNfTfkpOw/exec"
-        width="100%" height="700" style="border:none;"></iframe>
+    <iframe id="bookform" width="100%" height="700" style="border:none;"></iframe>
   </div>
+  <section class="contact" id="contact">
+    <div class="contact-container">
+      <div class="contact-info">
+        <h3 id="contactTitle">Contact</h3>
+        <p><strong data-i18n="labelCell">Cellphone:</strong> 5146326388</p>
+        <p><strong data-i18n="labelEmail">Email:</strong> bonnechancegw@yahoo.ca</p>
+        <p><strong data-i18n="labelAddress">Address:</strong> 2058 Chem. du Lac-Supérieur, Lac-Supérieur, Québec, Canada, J0T 1P0</p>
+      </div>
+      <div class="contact-social">
+        <h4 id="followUsTitle">Follow Us</h4>
+        <div class="social-links">
+          <a href="https://www.facebook.com" target="_blank">
+            <img src="images/Facebook.png" alt="Facebook" />
+          </a>
+          <a href="https://www.airbnb.ca/rooms/1401612893022718177?source_impression_id=p3_1749258723_P3g6wSzpDlf8fxfq" target="_blank">
+            <img src="images/Airbnb.png" alt="Airbnb" />
+          </a>
+          <a href="https://www.instagram.com" target="_blank">
+            <img src="images/Instagram.png" alt="Instagram" />
+          </a>
+          <a href="https://www.youtube.com" target="_blank">
+            <img src="images/Youtube.png" alt="Youtube" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <p>© 2025 Belle Auberge Inc. </p>
+  </footer>
 </body>
+<script>
+  const forms = {
+    fr: "https://docs.google.com/forms/d/e/1FAIpQLSeQcCr0U10_m2obj8n5PLOgg5KXLGVzRZ0gi6yk1dEXBNRxcQ/viewform?&embedded=true&hl=fr",
+    en: "https://docs.google.com/forms/d/e/1FAIpQLSeKOpHIW4dTVXqKhecKJBS-Xq5hE2ZmfWEZ2BXYIzVoBmMo0A/viewform?&embedded=true&hl=en"
+  };
+  const baseFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSeKOpHIW4dTVXqKhecKJBS-Xq5hE2ZmfWEZ2BXYIzVoBmMo0A/viewform?usp=header";
+  const langData = {
+    en: {
+      langBtn: 'Fr',
+      navHome: 'Home',
+      navRooms: 'Rooms',
+      navBooking: 'Booking',
+      navTarif: 'Tarif',
+      menuContact: "Contact",
+      contactTitle: "Contact",
+      followUsTitle: "Follow Us",
+      labelCell: "Cellphone",
+      labelEmail: "Email",
+      labelAddress: "Address"
+    },
+    fr: {
+      langBtn: 'En',
+      navHome: 'Accueil',
+      navRooms: 'Chambres',
+      navBooking: 'Réservation',
+      navTarif: 'Tarifs',
+      menuContact: "Contact",
+      contactTitle: "Contact",
+      followUsTitle: "Suivez-nous",
+      labelCell: "Téléphone",
+      labelEmail: "Courriel",
+      labelAddress: "Adresse"
+    }
+  };
+
+  function setLanguage(lang) {
+    const data = langData[lang];
+    const iframe = document.getElementById("bookform");
+    iframe.src = forms[lang];
+    document.getElementById('langBtn').innerText = data.langBtn;
+    document.getElementById('navHome').innerText = data.navHome;
+    document.getElementById('navRooms').innerText = data.navRooms;
+    document.getElementById('navBooking').innerText = data.navBooking;
+    document.getElementById('navTarif').innerText = data.navTarif;
+    document.querySelector('[data-i18n="menuContact"]').innerText = data.menuContact;
+    document.getElementById('contactTitle').innerText = data.contactTitle;
+    document.getElementById('followUsTitle').innerText = data.followUsTitle;
+    document.querySelector('[data-i18n="labelCell"]').innerText = data.labelCell + ":";
+    document.querySelector('[data-i18n="labelEmail"]').innerText = data.labelEmail + ":";
+    document.querySelector('[data-i18n="labelAddress"]').innerText = data.labelAddress + ":";
+    localStorage.setItem('preferredLanguage', lang);
+  }
+
+  (function () {
+    let lang = localStorage.getItem('preferredLanguage');
+    if (!lang) {
+      const browserLang = navigator.language || navigator.userLanguage;
+      lang = browserLang.startsWith('fr') ? 'fr' : 'en';
+    }
+    setLanguage(lang);
+
+    document.getElementById('langBtn').addEventListener('click', () => {
+      const newLang = document.getElementById('langBtn').innerText.toLowerCase() === 'fr' ? 'fr' : 'en';
+      setLanguage(newLang);
+    });
+  })();
+
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mainNav').classList.toggle('show');
+  });
+  </script>
 </html>
