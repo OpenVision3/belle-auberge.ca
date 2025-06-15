@@ -32,7 +32,7 @@ header {
 
 /* Logo */
 .logo img {
-  height: 100px;
+  height: 120px;
   filter: brightness(0) invert(1);
 }
 
@@ -125,7 +125,7 @@ header {
   }
 
   .logo img {
-    height: 50px;
+    height: 60px;
     filter: brightness(0) invert(1);
   }
 }
