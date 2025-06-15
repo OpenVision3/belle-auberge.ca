@@ -5,28 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Belle Auberge - Rooms</title>
   <link rel="stylesheet" href="style.css">
+  <script src="localization.js" defer></script>
 </head>
 <body>
   
   <!-- Header Section -->
   <header class="site-header">
-    <div class="header-left">
-      <a href="index.html" class="logo">
+    <div class="logo">
+      <a href="index.html">
         <img src="images/logo.png" alt="Belle Auberge Logo">
       </a>
     </div>
 
+    <!-- Navigation Menu -->
     <nav class="main-nav" id="mainNav">
-      <a href="index.html" data-i18n="menuHome">Home</a>
-      <a href="rooms.html" data-i18n="menuRooms">Rooms</a>
-      <a href="booking.html" data-i18n="menuBooking">Booking</a>
-      <a href="tarif.html" data-i18n="menuTarif">Tarif</a>
-      <a href="#contact" data-i18n="menuContact">Contact</a>
+      <a href="index.html" id="navHome" data-i18n="menuHome">Home</a>
+      <a href="rooms.html" id="navRooms" data-i18n="menuRooms">Rooms</a>
+      <a href="booking.html" id="navBooking" data-i18n="menuBooking">Booking</a>
+      <a href="tarif.html" id="navTarif" data-i18n="menuTarif">Tarif</a>
+      <a href="#contact" id="navContact" data-i18n="menuContact">Contact</a>
     </nav>
 
-    <div class="header-right">
+    <!-- Hamburger icon -->
+    <div class="right-controls">
       <button class="lang-toggle" id="langBtn">Fr</button>
-      <button class="hamburger" id="hamburger">&#9776;</button>
+      <button class="hamburger" id="hamburger" aria-label="Toggle Menu">&#9776;</button>
     </div>
   </header>
 
@@ -55,11 +58,11 @@
 
   <section class="room-selector-section">
   <div class="room-tabs">
-    <button class="room-tab active" data-index="0">Bedroom 1</button>
-    <button class="room-tab" data-index="1">Bedroom 2</button>
-    <button class="room-tab" data-index="2">Bedroom 3</button>
-    <button class="room-tab" data-index="3">Bedroom 4</button>
-    <button class="room-tab" data-index="4">Bedroom 5</button>
+    <button class="room-tab active" data-index="0" data-i18n="room1">Bedroom 1</button>
+    <button class="room-tab" data-index="1" data-i18n="room2">Bedroom 2</button>
+    <button class="room-tab" data-index="2" data-i18n="room3">Bedroom 3</button>
+    <button class="room-tab" data-index="3" data-i18n="room4">Bedroom 4</button>
+    <button class="room-tab" data-index="4" data-i18n="room5">Bedroom 5</button>
   </div>
 
   <div class="room-content-wrapper" id="roomContentWrapper">
@@ -131,168 +134,151 @@
 
     showSlides();
 
-    // Language toggle logic
-    const langBtn = document.getElementById("langBtn");
-    const userLang = localStorage.getItem("lang") || navigator.language.slice(0, 2);
-    setLanguage(userLang);
-
-    langBtn.addEventListener("click", () => {
-      const newLang = langBtn.textContent === "Fr" ? "fr" : "en";
-      setLanguage(newLang);
-    });
-
-    function setLanguage(lang) {
-      const strings = {
-        en: {
-          menuHome: "Home",
-          menuRooms: "Rooms",
-          menuBooking: "Booking",
-          menuTarif: "Tarif",
-          menuContact: "Contact",
-          exploreTitle: "What's Yours to Explore",
-          exploreLake: "Lake Access: Canoe, paddle-board, and more",
-          exploreSpa: "7-Person Spa",
-          exploreBackyard: "Large backyard: BBQ, badminton, ping-pong, foosball, playground",
-          exploreView: "Picturesque views: Surrounded by nature with lake view from patio",
-          exploreCharger: "Electric car charger available",
-          contact: "Contact",
-          cellphone: "Cellphone",
-          email: "Email",
-          address: "Address"
-        },
-        fr: {
-          menuHome: "Accueil",
-          menuRooms: "Chambres",
-          menuBooking: "Réservation",
-          menuTarif: "Tarifs",
-          menuContact: "Contact",
-          exploreTitle: "À découvrir chez vous",
-          exploreLake: "Accès au lac: canot, paddle board et plus",
-          exploreSpa: "Spa 7 places",
-          exploreBackyard: "Grande cour: BBQ, badminton, ping-pong, baby-foot, aire de jeux",
-          exploreView: "Vues pittoresques: entouré de nature avec vue sur le lac",
-          exploreCharger: "Borne de recharge électrique disponible",
-          contact: "Contact",
-          cellphone: "Téléphone",
-          email: "Courriel",
-          address: "Adresse"
-        }
-      };
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        el.textContent = strings[lang][key] || el.textContent;
-      });
-      langBtn.textContent = lang === "en" ? "Fr" : "En";
-      localStorage.setItem("lang", lang);
-    }
-
-    (function () {
-      let lang = localStorage.getItem('preferredLanguage');
-      if (!lang) {
+    let lang = localStorage.getItem('preferredLanguage');
+    if (!lang) {
         const browserLang = navigator.language || navigator.userLanguage;
         lang = browserLang.startsWith('fr') ? 'fr' : 'en';
-      }
-      setLanguage(lang);
-
-      document.getElementById('langBtn').addEventListener('click', () => {
-        const newLang = document.getElementById('langBtn').innerText.toLowerCase() === 'fr' ? 'fr' : 'en';
-        setLanguage(newLang);
-      });
-    })();
-    
-    const rooms = [
-    {
-      title: "Bedroom 1",
-      subtitle: "(3 persons room)",
-      desc: "Suit with tub and bathroom. Ideal for small families or close friends, private and relaxing.",
-      images: ["room1_1.jpg", "room1_2.jpg", "room1_3.jpg", "room1_4.jpg"]
-    },
-    {
-      title: "Bedroom 2",
-      subtitle: "(1-2 persons room)",
-      desc: "One king bed. Cozy and peaceful, perfect for couples seeking rest.",
-      images: ["room2_1.jpg", "room2_2.jpg"]
-    },
-    {
-      title: "Bedroom 3",
-      subtitle: "(3 persons room)",
-      desc: "One queen and one single bed. Great for groups of friends or small family.",
-      images: ["room3_1.jpg"]
-    },
-    {
-      title: "Bedroom 4",
-      subtitle: "(1-2 persons room)",
-      desc: "One king bed. Simple and elegant, with a forest view.",
-      images: ["room4_1.jpg"]
-    },
-    {
-      title: "Bedroom 5",
-      subtitle: "(3 persons room)",
-      desc: "Includes baby bed. Family-friendly with plenty of space.",
-      images: ["room5_1.jpg", "room5_2.jpg", "room5_3.jpg", "room5_4.jpg", "room5_5.jpg"]
     }
-  ];
 
-  let currentRoomIndex = 0;
-  let currentSlideIndex = 0;
+    // Rooms slide section
+    const rooms = {
+      en: [
+        {
+          title: "Bedroom 1",
+          subtitle: "(3 persons room)",
+          desc: "Suit with tub and bathroom. Ideal for small families or close friends, private and relaxing.",
+          images: ["room1_1.jpg", "room1_2.jpg", "room1_3.jpg", "room1_4.jpg"]
+        },
+        {
+          title: "Bedroom 2",
+          subtitle: "(1-2 persons room)",
+          desc: "One king bed. Cozy and peaceful, perfect for couples seeking rest.",
+          images: ["room2_1.jpg", "room2_2.jpg"]
+        },
+        {
+          title: "Bedroom 3",
+          subtitle: "(3 persons room)",
+          desc: "One queen and one single bed. Great for groups of friends or small family.",
+          images: ["room3_1.jpg"]
+        },
+        {
+          title: "Bedroom 4",
+          subtitle: "(1-2 persons room)",
+          desc: "One king bed. Simple and elegant, with a forest view.",
+          images: ["room4_1.jpg"]
+        },
+        {
+          title: "Bedroom 5",
+          subtitle: "(3 persons room)",
+          desc: "Includes baby bed. Family-friendly with plenty of space.",
+          images: ["room5_1.jpg", "room5_2.jpg", "room5_3.jpg", "room5_4.jpg", "room5_5.jpg"]
+        }
+      ],
+    fr: [
+      {
+        title: "Chambre 1",
+        subtitle: "(chambre pour 3 personnes)",
+        desc: "Suite avec baignoire et salle de bain. Idéale pour les petites familles ou les amis proches, privée et relaxante.",
+        images: ["room1_1.jpg", "room1_2.jpg", "room1_3.jpg", "room1_4.jpg"]
+      },
+      {
+        title: "Chambre 2",
+        subtitle: "(chambre pour 1 à 2 personnes)",
+        desc: "Un lit king. Chaleureuse et paisible, parfaite pour les couples en quête de repos.",
+        images: ["room2_1.jpg", "room2_2.jpg"]
+      },
+      {
+        title: "Chambre 3",
+        subtitle: "(chambre pour 3 personnes)",
+        desc: "Un lit queen et un lit simple. Parfaite pour un groupe d’amis ou une petite famille.",
+        images: ["room3_1.jpg"]
+      },
+      {
+        title: "Chambre 4",
+        subtitle: "(chambre pour 1 à 2 personnes)",
+        desc: "Un lit king. Simple et élégante, avec vue sur la forêt.",
+        images: ["room4_1.jpg"]
+      },
+      {
+        title: "Chambre 5",
+        subtitle: "(chambre pour 3 personnes)",
+        desc: "Comprend un lit bébé. Idéale pour les familles avec beaucoup d’espace.",
+        images: ["room5_1.jpg", "room5_2.jpg", "room5_3.jpg", "room5_4.jpg", "room5_5.jpg"]
+      }
+    ]
+  };
 
-  const tabs = document.querySelectorAll(".room-tab");
-  const wrapper = document.getElementById("roomContentWrapper");
+    let currentRoomIndex = 0;
+    let currentSlideIndex = 0;
 
-  function updateRoom(index) {
-    currentRoomIndex = index;
-    currentSlideIndex = 0;
+    const tabs = document.querySelectorAll(".room-tab");
+    const wrapper = document.getElementById("roomContentWrapper");
 
-    tabs.forEach(tab => tab.classList.remove("active"));
-    tabs[index].classList.add("active");
+    function updateRoom(index,lang) {
+      currentRoomIndex = index;
+      currentSlideIndex = 0;
 
-    const room = rooms[index];
+      tabs.forEach(tab => tab.classList.remove("active"));
+      tabs[index].classList.add("active");
 
-    // alternate image/description layout
-    const isImageLeft = index % 2 === 0;
+      const room = rooms[lang][index];
 
-    const imageSlider = `
-      <div class="room-image-slider">
-        <button class="room-arrow left" onclick="prevSlide()">
-          <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>
-        </button>
-        <img id="roomSlide" src="images/${room.images[0]}" alt="${room.title}">
-        <button class="room-arrow right" onclick="nextSlide()">
-          <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/>
-        </button>
-      </div>
-    `;
+      // alternate image/description layout
+      const isImageLeft = index % 2 === 0;
 
-    const description = `
-      <div class="room-description">
-        <h3>${room.title}</h3>
-        <h4>${room.subtitle}</h4>
-        <p>${room.desc}</p>
-      </div>
-    `;
+      const imageSlider = `
+        <div class="room-image-slider">
+          <button class="room-arrow left" onclick="prevSlide()">
+            <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>
+          </button>
+          <img id="roomSlide" src="images/${room.images[0]}" alt="${room.title}">
+          <button class="room-arrow right" onclick="nextSlide()">
+            <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/>
+          </button>
+        </div>
+      `;
 
-    wrapper.innerHTML = isImageLeft
-      ? imageSlider + description
-      : description + imageSlider;
-  }
+      const description = `
+        <div class="room-description">
+          <h3>${room.title}</h3>
+          <h4>${room.subtitle}</h4>
+          <p>${room.desc}</p>
+        </div>
+      `;
 
-  function nextSlide() {
-    const images = rooms[currentRoomIndex].images;
-    currentSlideIndex = (currentSlideIndex + 1) % images.length;
-    document.getElementById("roomSlide").src = "images/" + images[currentSlideIndex];
-  }
+      wrapper.innerHTML = isImageLeft
+        ? imageSlider + description
+        : description + imageSlider;
+    }
 
-  function prevSlide() {
-    const images = rooms[currentRoomIndex].images;
-    currentSlideIndex = (currentSlideIndex - 1 + images.length) % images.length;
-    document.getElementById("roomSlide").src = "images/" + images[currentSlideIndex];
-  }
+    function nextSlide() {
+      const images = rooms[currentRoomIndex].images;
+      currentSlideIndex = (currentSlideIndex + 1) % images.length;
+      document.getElementById("roomSlide").src = "images/" + images[currentSlideIndex];
+    }
 
-  tabs.forEach(tab => {
-    tab.addEventListener("click", () => updateRoom(parseInt(tab.dataset.index)));
-  });
+    function prevSlide() {
+      const images = rooms[currentRoomIndex].images;
+      currentSlideIndex = (currentSlideIndex - 1 + images.length) % images.length;
+      document.getElementById("roomSlide").src = "images/" + images[currentSlideIndex];
+    }
 
-  updateRoom(0); // initial load
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        let lang = localStorage.getItem('preferredLanguage');
+        if (!lang) {
+            const browserLang = navigator.language || navigator.userLanguage;
+            lang = browserLang.startsWith('fr') ? 'fr' : 'en';
+        }
+        updateRoom(parseInt(tab.dataset.index), lang);
+      });
+    });
+
+    updateRoom(0,lang); // initial load
+
+    function setupOtherContent(lang) {
+      updateRoom(currentSlideIndex, lang);
+    }
   </script>
 </body>
 </html>
