@@ -30,6 +30,18 @@ const langData = {
         room5: "BD5",
         // calendar
         calenderText: "Pick a date and book your next nature escape",
+        // tax info
+        "taxes.title": "Important: Taxes Applied to Your Stay",
+        "taxes.intro": "The following taxes are added to the base room rate (before taxes):",
+        "taxes.gst": "GST (TPS) – 5% <span>(Registration No. 778974568RT0001)</span>",
+        "taxes.qst": "QST (TVQ) – 9.975% <span>(Registration No. 1232503897TQ0001)</span>",
+        "taxes.occupancy": "Occupancy Tax – 3.5% <span>(calculated on the base room rate)</span>",
+        "taxes.noteTitle": "Please note:",
+        "taxes.noteDesc": "The occupancy tax only applies to the room rate, not the cleaning fee.",
+        "taxes.law": "These taxes are mandatory under federal and provincial law and will be itemized on your invoice.",
+        "taxes.docsTitle": "Documents:",
+        "taxes.doc1": "Certificate d'enregistrement",
+        "taxes.doc2": "Certificate d'inscription"
     },
     fr: {
         langBtn: 'En',
@@ -62,6 +74,18 @@ const langData = {
         room5: "Chambre 5",
         // calendar
         calenderText: "Choisissez une date et réservez votre prochaine escapade en pleine nature",
+        // tax info
+        "taxes.title": "Important : Taxes applicables à votre séjour",
+        "taxes.intro": "Les taxes suivantes s'ajoutent au tarif de base de la chambre (avant taxes) :",
+        "taxes.gst": "TPS (GST) – 5&nbsp;% <span>(No d'enregistrement : 778974568RT0001)</span>",
+        "taxes.qst": "TVQ (QST) – 9,975&nbsp;% <span>(No d'enregistrement : 1232503897TQ0001)</span>",
+        "taxes.occupancy": "Taxe d'hébergement – 3,5&nbsp;% <span>(calculée sur le tarif de base de la chambre)</span>",
+        "taxes.noteTitle": "Veuillez noter :",
+        "taxes.noteDesc": "La taxe d'hébergement s'applique uniquement au tarif de la chambre, et non aux frais de ménage.",
+        "taxes.law": "Ces taxes sont obligatoires selon les lois fédérales et provinciales et seront détaillées sur votre facture.",
+        "taxes.docsTitle": "Documents :",
+        "taxes.doc1": "Certificat d'enregistrement",
+        "taxes.doc2": "Certificat d'inscription"
     }
 };
 
@@ -81,7 +105,14 @@ function setLanguage(lang) {
 
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
-        el.innerText = data[key] || el.innerText;
+        const translation = data[key];
+        if (translation) {
+            if (el.tagName === "SPAN" || el.tagName === "STRONG" || el.tagName === "A" || el.tagName === "P" || el.tagName === "H3" || el.tagName === "H4" || el.tagName === "LI") {
+                el.innerHTML = translation;
+            } else {
+                el.textContent = translation;
+            }
+        }
       });
     localStorage.setItem('preferredLanguage', lang);
     setupOtherContent(lang);
