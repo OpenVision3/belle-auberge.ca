@@ -1,0 +1,70 @@
+.tax-info-section {
+  padding: 60px 20px;
+  background-color: #EAE6E1;
+  font-family: "Helvetica Neue", sans-serif;
+  color: #333;
+}
+
+.tax-info-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+.tax-info-text {
+  flex: 1 1 60%;
+}
+
+.tax-info-text h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #2e4e37;
+}
+
+.tax-info-text ul {
+  padding-left: 20px;
+  margin-bottom: 1rem;
+}
+
+.tax-info-text ul li {
+  margin-bottom: 0.5em;
+}
+
+.tax-info-text span {
+  color: #555;
+  font-size: 0.95em;
+}
+
+.tax-info-docs {
+  flex: 1 1 30%;
+  padding-top: 10px;
+}
+
+.tax-info-docs h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  color: #2e4e37;
+}
+
+.tax-info-docs ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tax-info-docs ul li {
+  margin-bottom: 10px;
+}
+
+.tax-info-docs a {
+  color: #007B7F;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.tax-info-docs a:hover {
+  text-decoration: none;
+}

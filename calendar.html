@@ -6,8 +6,8 @@
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
   <style>
     #calendar {
-      max-width: 700px;
-      margin: 40px auto;
+      max-width: 350px;
+      margin: 10px auto;
     }
   </style>
 </head>
@@ -19,10 +19,11 @@
       const calendarEl = document.getElementById('calendar');
 
       // Fetch data from Apps Script Web App
-      const response = await fetch('https://script.google.com/macros/s/AKfycbxb9mm8kz7kkRs4Ki-Et1j33FAsGkCu4hY7Ww2j_smMeHU15NpDfRAROh_01Cshmc_icw/exec');
+      const response = await fetch('https://script.google.com/macros/s/AKfycbyHlRc-mzfvp4aSAL3BJmdTSgSswKdFV6bbh6ZSYqV0joxRBj3YtnmCExdHzAwvg9-e0w/exec');
       const events = await response.json();
 
       const calendar = new FullCalendar.Calendar(calendarEl, {
+        themeSystem: 'standard',
         initialView: 'dayGridMonth',
         events: events.map(event => ({
           title: event.title,

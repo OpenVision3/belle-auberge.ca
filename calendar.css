@@ -1,0 +1,58 @@
+.calendar-section {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #FCFBF7;
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+.calendar-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items:stretch;
+  flex-wrap: wrap;
+}
+
+.calendar-text {
+  flex: 1 1 300px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.calendar-text h2 {
+  font-size: 2rem;
+  color: #2e4e37; /* earthy tone */
+  line-height: 1.4;
+}
+
+.calendar-widget {
+  flex: 1 1 400px;
+  min-width: 350px;
+}
+
+#calendar {
+    max-width: 450px;
+    margin: 10px auto;
+}
+
+/* Style the entire today cell */
+.fc .fc-day-today {
+  background-color: transparent !important; /* remove default background */
+}
+
+/* Apply red circle to the number inside the today cell */
+.fc .fc-day-today .fc-daygrid-day-number {
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
+  text-align: center;
+  border: 2px solid red;
+  border-radius: 50%;
+  color: red;
+  font-weight: bold;
+}

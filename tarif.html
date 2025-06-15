@@ -3,642 +3,187 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Belle Auberge Inc.</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f5f5f5;
-      color: #333;
-    }
-
-    header {
-      background: #4a7c59;
-      color: #fff;
-      padding: 10px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-
-    /* Header Base */
-    .site-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background-color: #4a7c59;
-      padding: 10px 20px;
-      color: white;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    /* Logo */
-    .logo img {
-      height: 50px;
-    }
-
-    /* 右上角控制区域 */
-    .right-controls {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    /* Navigation */
-    .main-nav {
-      display: flex;
-      gap: 20px;
-    }
-
-    .main-nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 1rem;
-      transition: color 0.2s;
-    }
-
-    .main-nav a:hover {
-      color: #d4f1c5;
-    }
-
-    /* Language Toggle */
-    .lang-toggle button {
-      background-color: white;
-      color: #4a7c59;
-      border: none;
-      padding: 6px 12px;
-      font-size: 0.9rem;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .lang-toggle button:hover {
-      background-color: #d4f1c5;
-    }
-
-    /* Hamburger Icon */
-    .hamburger {
-      display: none;
-      font-size: 28px;
-      color: white;
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .hamburger {
-        display: block;
-      }
-
-      .main-nav {
-        position: absolute;
-        top: 60px;
-        right: 0;
-        background-color: #4a7c59;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0;
-        width: 100%;
-        display: none;
-      }
-
-      .main-nav a {
-        padding: 15px 20px;
-        width: 100%;
-        border-top: 1px solid rgba(255, 255, 255, 0.2);
-      }
-
-      .main-nav.show {
-        display: flex;
-      }
-
-      .lang-toggle {
-        position: absolute;
-        top: 10px;
-        right: 70px;
-      }
-      .right-controls {
-        position: absolute;
-        top: 15px;
-        right: 20px;
-      }
-    }
-
-    .logo img {
-      height: 40px;
-    }
-
-    nav {
-      display: flex;
-      gap: 15px;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    .lang-toggle button {
-      background: #ffffffcc;
-      color: #4a7c59;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .hero {
-      position: relative;
-      width: 100%;
-      height: 80vh;
-      overflow: hidden;
-    }
-
-    .hero img {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;  /* 以图片中心为焦点 */
-      top: 0;
-      left: 0;
-      z-index: -1;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-    }
-
-    .hero img.active {
-      opacity: 1;
-    }
-
-    .hero-info {
-      position: absolute;
-      left: 20px;
-      bottom: 20px;
-      background: rgba(0, 0, 0, 0.5);
-      padding: 16px;
-      border-radius: 10px;
-      max-width: 300px; /* 控制大约三行字幕宽度 */
-      color: white;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-    }
-
-    .hero-info h2 {
-      margin: 0 0 10px;
-      font-size: 1.4rem;
-    }
-
-    .hero-info .button {
-      display: inline-block;
-      background: #ffcc00;
-      color: #333;
-      padding: 8px 16px;
-      font-size: 1rem;
-      border-radius: 6px;
-      font-weight: bold;
-      text-decoration: none;
-      margin-bottom: 10px;
-    }
-
-    .hero-info .button:hover {
-      background: #f4b400;
-    }
-
-    .hero-subtitle {
-      font-size: 0.95rem;
-      line-height: 1.4;
-    }
-
-    .hero-content h2 {
-      font-size: 2rem;
-      margin-bottom: 0.5em;
-    }
-
-    .hero-content a.button {
-      display: inline-block;
-      background: #ffcc00;
-      color: #333;
-      padding: 12px 24px;
-      font-size: 1.1rem;
-      border-radius: 8px;
-      font-weight: bold;
-      text-decoration: none;
-      transition: background 0.3s;
-    }
-
-    .hero-content a.button:hover {
-      background: #f4b400;
-    }
-
-    .indicators {
-      position: absolute;
-      bottom: 10px;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .indicator {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.6);
-      cursor: pointer;
-    }
-
-    .indicator.active {
-      background: white;
-    }
-
-    .location {
-      padding: 40px 20px;
-      background: #fff;
-      color: #333;
-    }
-
-    .location-container {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 30px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .location-map img {
-      width: 100%;
-      max-width: 500px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .location-description {
-      flex: 1;
-      min-width: 280px;
-    }
-
-    .location-description h3 {
-      font-size: 1.8rem;
-      margin-bottom: 15px;
-      color: #4a7c59;
-    }
-
-    .location-description p {
-      font-size: 1.05rem;
-      line-height: 1.6;
-    }
-
-    .activities {
-      padding: 40px 20px;
-      background: #f9f9f9;
-      text-align: center;
-    }
-
-    .activities h3 {
-      font-size: 1.8rem;
-      margin-bottom: 30px;
-      color: #4a7c59;
-    }
-
-    .activities-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-    }
-
-    .activity {
-      width: 120px;
-    }
-
-    .activity img {
-      width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    }
-
-    .activity p {
-      margin-top: 10px;
-      font-size: 1rem;
-      color: #333;
-    }
-
-    .contact {
-      background: #4a7c59;
-      padding: 20px 20px;
-    }
-
-    .contact-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 30px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .contact-info {
-      flex: 1;
-      min-width: 280px;
-    }
-
-    .contact-info h3 {
-      font-size: 1.8rem;
-      margin-bottom: 20px;
-    }
-
-    .contact-info p {
-      font-size: 1rem;
-      line-height: 1.5;
-    }
-
-    .contact-social {
-      flex: 1;
-      min-width: 280px;
-    }
-
-    .contact-social h4 {
-      font-size: 1.4rem;
-      margin-bottom: 16px;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .social-links img {
-      width: 48px;
-      height: 48px;
-      border-radius: 8px;
-      transition: transform 0.2s ease;
-    }
-
-    .social-links img:hover {
-      transform: scale(1.1);
-    }
-
-    footer {
-      background: #4a7c59;
-      color: #fff;
-      text-align: center;
-      padding: 10px;
-      margin-top: 0px;
-    }
-  </style>
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+  <link rel="stylesheet" href="header.css">
+  <link rel="stylesheet" href="calendar.css">
+  <link rel="stylesheet" href="roomcard.css">
+  <link rel="stylesheet" href="taxinfo.css">
+  <link rel="stylesheet" href="footer.css">
+  <script src="calendar.js" defer></script>
+  <script src="localization.js" defer></script>
+  <title>Pricing</title>
 </head>
 <body>
-<header class="site-header">
-  <div class="logo">
-    <a href="index.html">
-      <img src="images/logo.png" alt="Belle Auberge Logo">
-    </a>
-  </div>
+  <header class="site-header">
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/logo.png" alt="Belle Auberge Logo">
+      </a>
+    </div>
 
-  <!-- Navigation Menu -->
-  <nav class="main-nav" id="mainNav">
-    <a href="index.html" id="navHome" data-i18n="menuHome">Home</a>
-    <a href="rooms.html" id="navRooms" data-i18n="menuRooms">Rooms</a>
-    <a href="booking.html" id="navBooking" data-i18n="menuBooking">Booking</a>
-    <a href="tarif.html" id="navTarif" data-i18n="menuTarif">Tarif</a>
-    <a href="#contact" id="navContact" data-i18n="menuContact">Contact</a>
-  </nav>
+    <!-- Navigation Menu -->
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html" id="navHome" data-i18n="menuHome">Home</a>
+      <a href="rooms.html" id="navRooms" data-i18n="menuRooms">Rooms</a>
+      <a href="booking.html" id="navBooking" data-i18n="menuBooking">Booking</a>
+      <a href="tarif.html" id="navTarif" data-i18n="menuTarif">Tarif</a>
+      <a href="#contact" id="navContact" data-i18n="menuContact">Contact</a>
+    </nav>
 
-  <!-- Hamburger icon -->
-  <div class="right-controls">
-    <button class="lang-toggle" id="langBtn">Fr</button>
-    <button class="hamburger" id="hamburger" aria-label="Toggle Menu">&#9776;</button>
-  </div>
-</header>
-<section class="hero">
-  <img src="images/hero1.jpg" class="active" />
-  <img src="images/hero2.jpg" />
-  <img src="images/hero3.jpg" />
-  <img src="images/hero4.jpg" />
-  <img src="images/hero5.jpg" />
-  <img src="images/hero6.jpg" />
-  <img src="images/hero7.jpg" />
-  <img src="images/hero8.jpg" />
-  <div class="hero-info">
-    <div class="hero-content">
-      <h2 id="heroTitle">🇬🇧 Welcome</h2>
-      <a href="booking.html" class="button" id="heroButton">Book Now</a>
+    <!-- Hamburger icon -->
+    <div class="right-controls">
+      <button class="lang-toggle" id="langBtn">Fr</button>
+      <button class="hamburger" id="hamburger" aria-label="Toggle Menu">&#9776;</button>
     </div>
-    <div class="hero-subtitle" id="heroSubtitle">
-      Escape to a charming 5-bedroom retreat just a 1-minute walk from <strong>Lac-Supérieur</strong> and 5 minutes from the <strong>north side of Mont-Tremblant</strong>.
-    </div>
-  </div>
-  <div class="indicators" id="indicators"></div>
-  </div>
-</section>
-<section class="location">
-  <div class="location-container">
-    <div class="location-map">
-      <img src="images/map.jpg" alt="Map to Belle Auberge" />
-    </div>
-    <div class="location-description">
-      <h3 id="locationTitle">About Belle Auberge</h3>
-      <p id="locationText">
-        Just steps away from Lac-Supérieur and minutes from Mont-Tremblant's north side,
-        this 5-bedroom chalet is ideal for families and groups seeking tranquility and
-        recreation, accommodating up to 16 guests.
-      </p>
-    </div>
-  </div>
-</section>
-<section class="activities">
-  <h3 id="activitiesTitle">Activities</h3>
-  <div class="activities-grid">
-    <div class="activity">
-      <img src="images/Canoeing.png" alt="Canoeing" />
-      <p id="activityCanoeing">Canoeing</p>
-    </div>
-    <div class="activity">
-      <img src="images/Skiing.png" alt="Skiing" />
-      <p id="activitySkiing">Skiing</p>
-    </div>
-    <div class="activity">
-      <img src="images/Cycling.png" alt="Cycling" />
-      <p id="activityCycling">Cycling</p>
-    </div>
-    <div class="activity">
-      <img src="images/Hiking.png" alt="Hiking" />
-      <p id="activityHiking">Hiking</p>
-    </div>
-    <div class="activity">
-      <img src="images/Fishing.png" alt="Fishing" />
-      <p id="activityFishing">Fishing</p>
-    </div>
-  </div>
-</section>
-<section class="contact" id="contact">
-  <div class="contact-container">
-    <div class="contact-info">
-      <h3 id="contactTitle">Contact</h3>
-      <p><strong data-i18n="labelCell">Cellphone:</strong> 5146326388</p>
-      <p><strong data-i18n="labelEmail">Email:</strong> bonnechancegw@yahoo.ca</p>
-      <p><strong data-i18n="labelAddress">Address:</strong> 2058 Chem. du Lac-Supérieur, Lac-Supérieur, Québec, Canada, J0T 1P0</p>
-    </div>
-    <div class="contact-social">
-      <h4 id="followUsTitle">Follow Us</h4>
-      <div class="social-links">
-        <a href="https://www.facebook.com" target="_blank">
-          <img src="images/Facebook.png" alt="Facebook" />
-        </a>
-        <a href="https://www.airbnb.ca/rooms/1401612893022718177?source_impression_id=p3_1749258723_P3g6wSzpDlf8fxfq" target="_blank">
-          <img src="images/Airbnb.png" alt="Airbnb" />
-        </a>
-        <a href="https://www.instagram.com" target="_blank">
-          <img src="images/Instagram.png" alt="Instagram" />
-        </a>
-        <a href="https://www.youtube.com" target="_blank">
-          <img src="images/Youtube.png" alt="Youtube" />
-        </a>
+  </header>
+  
+  <!-- calendar section -->
+  <section class="calendar-section">
+    <div class="calendar-container">
+      <div class="calendar-text">
+        <h2>Pick a date and book your next nature escape</h2>
+      </div>
+      <div class="calendar-widget">
+        <div id="calendar"></div>
       </div>
     </div>
-  </div>
-</section>
-<footer>
-  <p>© 2025 Belle Auberge Inc. </p>
-</footer>
-<script>
-  const langData = {
-    en: {
-      langBtn: 'Fr',
-      navHome: 'Home',
-      navRooms: 'Rooms',
-      navBooking: 'Booking',
-      navTarif: 'Tarif',
-      heroTitle: '🇬🇧 Welcome',
-      heroSubtitle: 'Escape to a charming 5-bedroom retreat just a 1-minute walk from <strong>Lac-Supérieur</strong> and 5 minutes from the <strong>north side of Mont-Tremblant</strong>.',
-      heroButton: 'Book Now',
-      locationTitle: "About Belle Auberge",
-      locationText: "Just steps away from Lac-Supérieur and minutes from Mont-Tremblant's north side, this 5-bedroom chalet is ideal for families and groups seeking tranquility and recreation, accommodating up to 16 guests.",
-      activitiesTitle: "Activities",
-      activityCanoeing: "Canoeing",
-      activitySkiing: "Skiing",
-      activityCycling: "Cycling",
-      activityHiking: "Hiking",
-      activityFishing: "Fishing",
-      menuContact: "Contact",
-      contactTitle: "Contact",
-      followUsTitle: "Follow Us",
-      labelCell: "Cellphone",
-      labelEmail: "Email",
-      labelAddress: "Address"
-    },
-    fr: {
-      langBtn: 'En',
-      navHome: 'Accueil',
-      navRooms: 'Chambres',
-      navBooking: 'Réservation',
-      navTarif: 'Tarifs',
-      heroTitle: '🇫🇷 Bienvenue',
-      heroSubtitle: 'Évadez-vous dans un refuge charmant de 5 chambres à coucher, à seulement 1 minute à pied du <strong>Lac-Supérieur</strong> et à 5 minutes du <strong>versant nord du Mont-Tremblant</strong>.',
-      heroButton: 'Réserver',
-      locationTitle: "À propos de Belle Auberge",
-      locationText: "À quelques pas du Lac-Supérieur et à quelques minutes du versant nord du Mont-Tremblant, ce chalet de 5 chambres est idéal pour les familles et les groupes en quête de tranquillité et de loisirs, pouvant accueillir jusqu'à 16 personnes.",
-      activitiesTitle: "Activités",
-      activityCanoeing: "Canotage",
-      activitySkiing: "Ski",
-      activityCycling: "Cyclisme",
-      activityHiking: "Randonnée",
-      activityFishing: "Pêche",
-      menuContact: "Contact",
-      contactTitle: "Contact",
-      followUsTitle: "Suivez-nous",
-      labelCell: "Téléphone",
-      labelEmail: "Courriel",
-      labelAddress: "Adresse"
-    }
-  };
+  </section>
 
-  function setLanguage(lang) {
-    const data = langData[lang];
-    document.getElementById('langBtn').innerText = data.langBtn;
-    document.getElementById('navHome').innerText = data.navHome;
-    document.getElementById('navRooms').innerText = data.navRooms;
-    document.getElementById('navBooking').innerText = data.navBooking;
-    document.getElementById('navTarif').innerText = data.navTarif;
-    document.getElementById('heroTitle').innerText = data.heroTitle;
-    document.getElementById('heroSubtitle').innerHTML = data.heroSubtitle;
-    document.getElementById('heroButton').innerText = data.heroButton;
-    document.getElementById('locationTitle').innerText = data.locationTitle;
-    document.getElementById('locationText').innerText = data.locationText;
-    document.getElementById('activitiesTitle').innerText = data.activitiesTitle;
-    document.getElementById('activityCanoeing').innerText = data.activityCanoeing;
-    document.getElementById('activitySkiing').innerText = data.activitySkiing;
-    document.getElementById('activityCycling').innerText = data.activityCycling;
-    document.getElementById('activityHiking').innerText = data.activityHiking;
-    document.getElementById('activityFishing').innerText = data.activityFishing;
-    document.querySelector('[data-i18n="menuContact"]').innerText = data.menuContact;
-    document.getElementById('contactTitle').innerText = data.contactTitle;
-    document.getElementById('followUsTitle').innerText = data.followUsTitle;
-    document.querySelector('[data-i18n="labelCell"]').innerText = data.labelCell + ":";
-    document.querySelector('[data-i18n="labelEmail"]').innerText = data.labelEmail + ":";
-    document.querySelector('[data-i18n="labelAddress"]').innerText = data.labelAddress + ":";
-    localStorage.setItem('preferredLanguage', lang);
-  }
+  <!-- option card section -->
+   <section class="rooms-section">
+    <div class="rooms-container">
+      <div class="room-card" style="background-image: url('images/option1.jpg')">
+        <div class="room-badge">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+            <circle cx="12" cy="7" r="4" />
+            <path d="M4 20c0-4 4-6 8-6s8 2 8 6v1H4v-1z" />
+          </svg>
+          16 max
+        </div>
+        <div class="room-info">
+          <p>Rent all 5 bedrooms</p>
+          <li>$699 + $299 cleaning fee</li>
+          <li>Description</li>
+        </div>
+        <button class="book-button">Book Now</button>
+      </div>
+      <div class="room-card" style="background-image: url('images/option2.jpg')">
+        <div class="room-badge">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+            <circle cx="12" cy="7" r="4" />
+            <path d="M4 20c0-4 4-6 8-6s8 2 8 6v1H4v-1z" />
+          </svg>
+          12 max
+        </div>
+        <div class="room-info">
+          <p>Rent B1, B2, B3, B5</p>
+          <li>$599 + $249 cleaning fee</li>
+          <li>Description</li>
+        </div>
+        <button class="book-button">Book Now</button>
+      </div>
+      <div class="room-card" style="background-image: url('images/option3.jpg')">
+        <div class="room-badge">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+            <circle cx="12" cy="7" r="4" />
+            <path d="M4 20c0-4 4-6 8-6s8 2 8 6v1H4v-1z" />
+          </svg>
+          11 max
+        </div>
+        <div class="room-info">
+          <p>Rent B1, B2, B3, B4</p>
+          <li>$599 + $229 cleaning fee</li>
+          <li>Description</li>
+        </div>
+        <button class="book-button">Book Now</button>
+      </div>
+      <div class="room-card" style="background-image: url('images/option4.jpg')">
+        <div class="room-badge">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+            <circle cx="12" cy="7" r="4" />
+            <path d="M4 20c0-4 4-6 8-6s8 2 8 6v1H4v-1z" />
+          </svg>
+          9 max
+        </div>
+        <div class="room-info">
+          <p>Rent B1, B3, B5</p>
+          <li>$549 + $199 cleaning fee</li>
+          <li>Description</li>
+        </div>
+        <button class="book-button">Book Now</button>
+      </div>
+      <div class="room-card" style="background-image: url('images/option5.jpg')">
+        <div class="room-badge">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+            <circle cx="12" cy="7" r="4" />
+            <path d="M4 20c0-4 4-6 8-6s8 2 8 6v1H4v-1z" />
+          </svg>
+          8 max
+        </div>
+        <div class="room-info">
+          <p>Rent B1, B2, B4</p>
+          <li>$499 + $199 cleaning fee</li>
+          <li>Description</li>
+        </div>
+        <button class="book-button">Book Now</button>
+      </div>
+    </div>
+  </section>
+  <!-- tax info section -->
+  <section class="tax-info-section">
+    <div class="tax-info-container">
+      <div class="tax-info-text">
+        <h3>Important: Taxes Applied to Your Stay</h3>
+        <p>The following taxes are added to the base room rate (before taxes):</p>
+        <ul>
+          <li>GST (TPS) – 5% <span>(Registration No. 778974568RT0001)</span></li>
+          <li>QST (TVQ) – 9.975% <span>(Registration No. 1232503897TQ0001)</span></li>
+          <li>Occupancy Tax – 3.5% <span>(calculated on the base room rate)</span></li>
+        </ul>
+        <p><strong>Please note:</strong> The occupancy tax only applies to the room rate, not the cleaning fee.</p>
+        <p>These taxes are mandatory under federal and provincial law and will be itemized on your invoice.</p>
+      </div>
+      <div class="tax-info-docs">
+        <h4>Documents:</h4>
+        <ul>
+          <li><a href="pdf/321009 - Certificat enregistrement.pdf" target="_blank">Certificate d'enregistrement</a></li>
+          <li><a href="pdf/1180641632 - Certificat d'inscription.pdf" target="_blank">Certificate d'inscription</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-  (function () {
-    let lang = localStorage.getItem('preferredLanguage');
-    if (!lang) {
-      const browserLang = navigator.language || navigator.userLanguage;
-      lang = browserLang.startsWith('fr') ? 'fr' : 'en';
-    }
-    setLanguage(lang);
-
-    document.getElementById('langBtn').addEventListener('click', () => {
-      const newLang = document.getElementById('langBtn').innerText.toLowerCase() === 'fr' ? 'fr' : 'en';
-      setLanguage(newLang);
-    });
-  })();
-
-  // Slideshow + indicators
-  const images = document.querySelectorAll('.hero img');
-  const indicators = document.getElementById('indicators');
-  let current = 0;
-
-  function updateSlide(index) {
-    images.forEach((img, i) => img.classList.toggle('active', i === index));
-    document.querySelectorAll('.indicator').forEach((dot, i) =>
-      dot.classList.toggle('active', i === index)
-    );
-    current = index;
-  }
-
-  function nextSlide() {
-    const next = (current + 1) % images.length;
-    updateSlide(next);
-  }
-
-  images.forEach((_, i) => {
-    const dot = document.createElement('div');
-    dot.classList.add('indicator');
-    if (i === 0) dot.classList.add('active');
-    dot.addEventListener('click', () => updateSlide(i));
-    indicators.appendChild(dot);
-  });
-
-  setInterval(nextSlide, 4000);
-  document.getElementById('hamburger').addEventListener('click', () => {
-    document.getElementById('mainNav').classList.toggle('show');
-  });
-</script>
-
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
+    <div class="contact-container">
+      <div class="contact-info">
+        <h3 id="contactTitle">Contact</h3>
+        <p><strong data-i18n="labelCell">Cellphone:</strong> 5146326388</p>
+        <p><strong data-i18n="labelEmail">Email:</strong> bonnechancegw@yahoo.ca</p>
+        <p><strong data-i18n="labelAddress">Address:</strong> 2058 Chem. du Lac-Supérieur, Lac-Supérieur, Québec, Canada, J0T 1P0</p>
+      </div>
+      <div class="contact-social">
+        <h4 id="followUsTitle">Follow Us</h4>
+        <div class="social-links">
+          <a href="https://www.facebook.com" target="_blank">
+            <img src="images/Facebook.png" alt="Facebook" />
+          </a>
+          <a href="https://www.airbnb.ca/rooms/1401612893022718177?source_impression_id=p3_1749258723_P3g6wSzpDlf8fxfq" target="_blank">
+            <img src="images/Airbnb.png" alt="Airbnb" />
+          </a>
+          <a href="https://www.instagram.com" target="_blank">
+            <img src="images/Instagram.png" alt="Instagram" />
+          </a>
+          <a href="https://www.youtube.com" target="_blank">
+            <img src="images/Youtube.png" alt="Youtube" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <p>© 2025 Belle Auberge Inc. </p>
+  </footer>
 </body>
 </html>
