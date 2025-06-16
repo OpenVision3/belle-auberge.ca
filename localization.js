@@ -70,7 +70,7 @@ const langData = {
         payment_method: "Payment Method",
         credit: "Credit",
         debit: "Debit",
-        etransfer: "e-Transfer",
+        etransfer: "eTransfer",
         card_number: "Card Number",
         card_name: "Name",
         expiry: "Expiry (YY/MM)",
