@@ -247,7 +247,7 @@
         // Payment Method Toggle
         document.querySelectorAll("input[name='payment']").forEach(radio => {
         radio.addEventListener('change', e => {
-            document.getElementById('credit-form').style.display = e.target.value === 'credit' ? 'block' : 'none';
+            document.getElementById('credit-form').style.display = e.target.value === 'credit' ? 'flex' : 'none';
             document.getElementById('debit-info').style.display = e.target.value === 'debit' ? 'block' : 'none';
             document.getElementById('etransfer-info').style.display = e.target.value === 'etransfer' ? 'block' : 'none';
         });
@@ -308,7 +308,7 @@
     }
 
     if (!valid) {
-      alert("Please fill out all required fields.");
+      // alert("Please fill out all required fields.");
       return;
     }
 
