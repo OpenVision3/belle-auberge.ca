@@ -75,7 +75,10 @@ const langData = {
         card_name: "Name",
         expiry: "Expiry (YY/MM)",
         cvv: "CVV",
-        send_request: "Send Request"
+        send_request: "Send Request",
+        to:"To:",
+        question:"Question:",
+        answer:"Answer:"
     },
     fr: {
         langBtn: 'En',
@@ -153,7 +156,10 @@ const langData = {
         card_name: "Nom",
         expiry: "Expiration (AA/MM)",
         cvv: "CVV",
-        send_request: "Envoyer la demande"
+        send_request: "Envoyer la demande",
+        to: "À :",
+        question: "Question :",
+        answer: "Réponse :"
     }
 };
 

@@ -104,34 +104,34 @@
         <div class="payment-method">
           <h3 data-i18n="payment_method">Payment Method</h3>
           <div class="payment-methods">
-              <label><input type="radio" name="payment" value="credit" checked data-i18n="credit" /> Credit</label>
-              <label><input type="radio" name="payment" value="debit" data-i18n="debit" /> Debit</label>
-              <label><input type="radio" name="payment" value="etransfer" data-i18n="etransfer" /> E-Transfer</label>
+              <label><input type="radio" name="payment" value="credit" checked /> <span data-i18n="credit">Credit</span></label>
+              <label><input type="radio" name="payment" value="debit"/> <span data-i18n="debit">Debit</span></label>
+              <label><input type="radio" name="payment" value="etransfer"/> <span data-i18n="etransfer">E-Transfer</span></label>
           </div>
 
           <div class="method-details" id="credit-form">
             <label data-i18n="card_number">Card Number</label>
-            <input type="text" />
+            <input type="text" id="cardNumber"/>
             <label data-i18n="card_name">Name</label>
-            <input type="text" />
+            <input type="text" id="cardName"/>
             <label data-i18n="expiry">Expiry (YY/MM)</label>
-            <input type="text" />
+            <input type="text" id="cardExpiry"/>
             <label data-i18n="cvv">CVV</label>
-            <input type="text" />
+            <input type="text" id="cardCVV"/>
           </div>
 
           <div class="method-details" id="debit-info" style="display: none;">
-            <img src="voidcheck/belleauberge_check.jpg" alt="Void Check" width="200" />
+            <img src="voidcheck/belleauberge_check.jpg" alt="Void Check" width="100%" />
           </div>
 
           <div class="method-details" id="etransfer-info" style="display: none;">
-            <p>To: 5146326388</p>
-            <p>Question: Always good luck?</p>
-            <p>Answer: Yes</p>
+            <p><span data-i18n="to">To:</span>5146326388</p>
+            <p><span data-i18n="question">Question:</span>Always good luck?</p>
+            <p><span data-i18n="answer">Answer:</span>Yes</p>
           </div>
         </div>
       </form>
-      <button class="send-request-btn" data-i18n="send_request">Send Request</button>
+      <button id="submitBtn" type="button" class="send-request-btn" data-i18n="send_request">Send Request</button>
     </div>
   </section>
 
@@ -254,5 +254,69 @@
         });
     }
   </script>
+  <!-- validation check  -->
+  <script>
+    document.getElementById("submitBtn").addEventListener("click", function () {
+    const requiredFields = [
+      'checkin',
+      'checkout',
+      'guests',
+      'package'
+    ];
+
+    let valid = true;
+
+    // Validate Reservation Form
+    requiredFields.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el.value) {
+        el.style.border = '2px solid red';
+        valid = false;
+      } else {
+        el.style.border = '';
+      }
+    });
+
+    // Validate Guest Form Inputs
+    const guestFields = [
+      'fname', 'lname', 'phone', 'email',
+      'address', 'city', 'country', 'province', 'postal'
+    ];
+
+    guestFields.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && !el.value) {
+        el.style.border = '2px solid red';
+        valid = false;
+      } else if (el) {
+        el.style.border = '';
+      }
+    });
+
+    // Credit card inputs if credit is selected
+    const payment = document.querySelector('input[name="payment"]:checked').value;
+    if (payment === 'credit') {
+      ['cardNumber', 'cardName', 'cardExpiry', 'cardCVV'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el || !el.value) {
+          if (el) el.style.border = '2px solid red';
+          valid = false;
+        } else {
+          el.style.border = '';
+        }
+      });
+    }
+
+    if (!valid) {
+      alert("Please fill out all required fields.");
+      return;
+    }
+
+    // Otherwise, submit the form (e.g., via fetch or post)
+    // alert("Form is valid! Submitting...");
+    // TODO: send to server
+  });
+</script>
+
 </body>
 </html>
