@@ -1,28 +1,13 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>房间预订</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      padding: 20px;
-      background-color: #f4f4f4;
-    }
-    h1 {
-      text-align: center;
-    }
-    .form-container {
-      max-width: 800px;
-      margin: 0 auto;
-      background: white;
-      padding: 20px;
-      border-radius: 0px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-  </style>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="header.css">
+  <link rel="stylesheet" href="footer.css">
+  <link rel="stylesheet" href="reservation.css" />
+  <script src="localization.js" defer></script>
+  <title>Booking - Belle Auberge</title>
 </head>
 <body>
   <header class="site-header">
@@ -47,9 +32,110 @@
       <button class="hamburger" id="hamburger" aria-label="Toggle Menu">&#9776;</button>
     </div>
   </header>
-  <div class="form-container">
-    <iframe id="bookform" width="100%" height="700" style="border:none;"></iframe>
-  </div>
+
+  <section class="reservation-section">
+    <div class="reservation-left">
+      <h2 data-i18n="your_reservation">Your Reservation</h2>
+      <form class="reservation-form">
+        <label for="checkin" data-i18n="check_in">Check-in</label>
+        <input type="date" id="checkin" name="checkin" />
+
+        <label for="checkout" data-i18n="check_out">Check-out</label>
+        <input type="date" id="checkout" name="checkout" />
+
+        <label for="guests" data-i18n="guests">Guests</label>
+        <input type="number" id="guests" name="guests" min="1" max="16" />
+
+        <label for="package" data-i18n="package">Select Package</label>
+        <select id="package" name="package">
+          <option value="1" data-price="500">2 Guests - $500</option>
+          <option value="2" data-price="700">3 Guests - $700</option>
+          <option value="3" data-price="900">4 Guests - $900</option>
+          <option value="4" data-price="1100">5 Guests - $1100</option>
+          <option value="5" data-price="1300">6+ Guests - $1300</option>
+        </select>
+
+        <label for="requirements" data-i18n="requirements">Additional Requirements</label>
+        <textarea id="requirements" name="requirements" rows="4"></textarea>
+
+        <div class="payment-summary">
+          <h3 data-i18n="payment_summary">Payment Summary</h3>
+          <div class="line"><span data-i18n="selected_package">Selected Package</span><span id="summary-package">-</span></div>
+          <div class="line"><span data-i18n="cleaning_fee">Cleaning Fee</span><span id="summary-cleaning">$100</span></div>
+          <div class="line"><span data-i18n="subtotal">Subtotal</span><span id="summary-subtotal">-</span></div>
+          <div class="line"><span data-i18n="gst">GST (5%)</span><span id="summary-gst">-</span></div>
+          <div class="line"><span data-i18n="qst">QST (9.975%)</span><span id="summary-qst">-</span></div>
+          <div class="line"><span data-i18n="occupancy_tax">Occupancy Tax (3.5%)</span><span id="summary-occupancy">-</span></div>
+          <div class="line total"><span data-i18n="total">Total</span><span id="summary-total">-</span></div>
+        </div>
+      </form>
+    </div>
+
+    <div class="reservation-right">
+      <h2 data-i18n="guest_info">Guest Information</h2>
+      <form class="guest-form">
+        <label for="fname" data-i18n="first_name">First Name</label>
+        <input type="text" id="fname" />
+
+        <label for="lname" data-i18n="last_name">Last Name</label>
+        <input type="text" id="lname" />
+
+        <label for="phone" data-i18n="phone">Phone</label>
+        <input type="text" id="phone" />
+
+        <label for="email" data-i18n="email">Email</label>
+        <input type="email" id="email" />
+
+        <label for="address" data-i18n="address">Address</label>
+        <input type="text" id="address" />
+
+        <label for="city" data-i18n="city">City</label>
+        <input type="text" id="city" />
+
+        <label for="country" data-i18n="country">Country</label>
+        <input type="text" id="country" />
+
+        <label for="province" data-i18n="province">Province/State</label>
+        <input type="text" id="province" />
+
+        <label for="postal" data-i18n="postal_code">Postal Code</label>
+        <input type="text" id="postal" />
+
+        <div class="payment-method">
+          <h3 data-i18n="payment_method">Payment Method</h3>
+          <div class="payment-methods">
+              <label><input type="radio" name="payment" value="credit" checked data-i18n="credit" /> Credit</label>
+              <label><input type="radio" name="payment" value="debit" data-i18n="debit" /> Debit</label>
+              <label><input type="radio" name="payment" value="etransfer" data-i18n="etransfer" /> E-Transfer</label>
+          </div>
+
+          <div class="method-details" id="credit-form">
+            <label data-i18n="card_number">Card Number</label>
+            <input type="text" />
+            <label data-i18n="card_name">Name</label>
+            <input type="text" />
+            <label data-i18n="expiry">Expiry (YY/MM)</label>
+            <input type="text" />
+            <label data-i18n="cvv">CVV</label>
+            <input type="text" />
+          </div>
+
+          <div class="method-details" id="debit-info" style="display: none;">
+            <img src="voidcheck/belleauberge_check.jpg" alt="Void Check" width="200" />
+          </div>
+
+          <div class="method-details" id="etransfer-info" style="display: none;">
+            <p>To: 5146326388</p>
+            <p>Question: Always good luck?</p>
+            <p>Answer: Yes</p>
+          </div>
+        </div>
+      </form>
+      <button class="send-request-btn" data-i18n="send_request">Send Request</button>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
   <section class="contact" id="contact">
     <div class="contact-container">
       <div class="contact-info">
@@ -80,76 +166,94 @@
   <footer>
     <p>© 2025 Belle Auberge Inc. </p>
   </footer>
-</body>
-<script>
-  const forms = {
-    fr: "https://docs.google.com/forms/d/e/1FAIpQLSeQcCr0U10_m2obj8n5PLOgg5KXLGVzRZ0gi6yk1dEXBNRxcQ/viewform?&embedded=true&hl=fr",
-    en: "https://docs.google.com/forms/d/e/1FAIpQLSeKOpHIW4dTVXqKhecKJBS-Xq5hE2ZmfWEZ2BXYIzVoBmMo0A/viewform?&embedded=true&hl=en"
-  };
-  const baseFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSeKOpHIW4dTVXqKhecKJBS-Xq5hE2ZmfWEZ2BXYIzVoBmMo0A/viewform?usp=header";
-  const langData = {
-    en: {
-      langBtn: 'Fr',
-      navHome: 'Home',
-      navRooms: 'Rooms',
-      navBooking: 'Booking',
-      navTarif: 'Price',
-      menuContact: "Contact",
-      contactTitle: "Contact",
-      followUsTitle: "Follow Us",
-      labelCell: "Cellphone",
-      labelEmail: "Email",
-      labelAddress: "Address"
-    },
-    fr: {
-      langBtn: 'En',
-      navHome: 'Accueil',
-      navRooms: 'Chambres',
-      navBooking: 'Réservation',
-      navTarif: 'Tarifs',
-      menuContact: "Contact",
-      contactTitle: "Contact",
-      followUsTitle: "Suivez-nous",
-      labelCell: "Téléphone",
-      labelEmail: "Courriel",
-      labelAddress: "Adresse"
+
+  <script>
+    function mockFetchPricing(checkin, checkout, packageId) {
+      return new Promise(resolve => {
+        const start = new Date(checkin);
+        const end = new Date(checkout);
+        const dayMs = 1000 * 60 * 60 * 24;
+        const numNights = Math.max(1, Math.round((end - start) / dayMs));
+        
+        // 模拟不同日期的价格
+        const rates = {};
+        let total = 0;
+        for (let i = 0; i < numNights; i++) {
+          const date = new Date(start.getTime() + i * dayMs);
+          const key = date.toISOString().split('T')[0];
+          const dailyRate = 200 + (i % 3) * 30; // 模拟波动
+          rates[key] = dailyRate;
+          total += dailyRate;
+        }
+    
+        // 模拟不同套餐清洁费用
+        const cleaningFeeByPackage = {
+          '1': 100,
+          '2': 120,
+          '3': 130,
+          '4': 140,
+          '5': 150
+        };
+    
+        resolve({
+          rates,
+          packageTotal: total,
+          maxCleaningFee: cleaningFeeByPackage[packageId] || 120
+        });
+      });
     }
-  };
 
-  function setLanguage(lang) {
-    const data = langData[lang];
-    const iframe = document.getElementById("bookform");
-    iframe.src = forms[lang];
-    document.getElementById('langBtn').innerText = data.langBtn;
-    document.getElementById('navHome').innerText = data.navHome;
-    document.getElementById('navRooms').innerText = data.navRooms;
-    document.getElementById('navBooking').innerText = data.navBooking;
-    document.getElementById('navTarif').innerText = data.navTarif;
-    document.querySelector('[data-i18n="menuContact"]').innerText = data.menuContact;
-    document.getElementById('contactTitle').innerText = data.contactTitle;
-    document.getElementById('followUsTitle').innerText = data.followUsTitle;
-    document.querySelector('[data-i18n="labelCell"]').innerText = data.labelCell + ":";
-    document.querySelector('[data-i18n="labelEmail"]').innerText = data.labelEmail + ":";
-    document.querySelector('[data-i18n="labelAddress"]').innerText = data.labelAddress + ":";
-    localStorage.setItem('preferredLanguage', lang);
-  }
+    async function fetchRatesAndCalculate() {
+        alert("call fetchRatesAndCalculate");
+      const checkin = document.getElementById('checkin').value;
+      const checkout = document.getElementById('checkout').value;
+      const packageId = document.getElementById('package').value;
 
-  (function () {
-    let lang = localStorage.getItem('preferredLanguage');
-    if (!lang) {
-      const browserLang = navigator.language || navigator.userLanguage;
-      lang = browserLang.startsWith('fr') ? 'fr' : 'en';
+      if (!checkin || !checkout || !packageId) return;
+
+      try {
+        // const res = await fetch(`/api/pricing?checkin=${checkin}&checkout=${checkout}&package=${packageId}`);
+        // const data = await res.json();
+
+        // 模拟获取价格数据（替代 fetch 请求）
+        const data = await mockFetchPricing(checkin, checkout, packageId);
+
+
+        const { packageTotal, maxCleaningFee, rates } = data;
+
+        const subtotal = packageTotal + maxCleaningFee;
+        const gst = +(subtotal * 0.05).toFixed(2);
+        const qst = +(subtotal * 0.09975).toFixed(2);
+        const occTax = +(subtotal * 0.035).toFixed(2);
+        const total = +(subtotal + gst + qst + occTax).toFixed(2);
+
+        document.getElementById('summary-package').textContent = `$${packageTotal.toFixed(2)}`;
+        document.getElementById('summary-cleaning').textContent = `$${maxCleaningFee.toFixed(2)}`;
+        document.getElementById('summary-subtotal').textContent = `$${subtotal.toFixed(2)}`;
+        document.getElementById('summary-gst').textContent = `$${gst.toFixed(2)}`;
+        document.getElementById('summary-qst').textContent = `$${qst.toFixed(2)}`;
+        document.getElementById('summary-occupancy').textContent = `$${occTax.toFixed(2)}`;
+        document.getElementById('summary-total').textContent = `$${total.toFixed(2)}`;
+
+      } catch (err) {
+        console.error('Failed to fetch pricing data:', err);
+      }
     }
-    setLanguage(lang);
 
-    document.getElementById('langBtn').addEventListener('click', () => {
-      const newLang = document.getElementById('langBtn').innerText.toLowerCase() === 'fr' ? 'fr' : 'en';
-      setLanguage(newLang);
-    });
-  })();
+    document.getElementById('checkin').addEventListener('change', fetchRatesAndCalculate);
+    document.getElementById('checkout').addEventListener('change', fetchRatesAndCalculate);
+    document.getElementById('package').addEventListener('change', fetchRatesAndCalculate);
 
-  document.getElementById('hamburger').addEventListener('click', () => {
-    document.getElementById('mainNav').classList.toggle('show');
-  });
+    function setupOtherContent(lang) {
+        // Payment Method Toggle
+        document.querySelectorAll("input[name='payment']").forEach(radio => {
+        radio.addEventListener('change', e => {
+            document.getElementById('credit-form').style.display = e.target.value === 'credit' ? 'block' : 'none';
+            document.getElementById('debit-info').style.display = e.target.value === 'debit' ? 'block' : 'none';
+            document.getElementById('etransfer-info').style.display = e.target.value === 'etransfer' ? 'block' : 'none';
+        });
+        });
+    }
   </script>
+</body>
 </html>
