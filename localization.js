@@ -78,8 +78,14 @@ const langData = {
         send_request: "Send Request",
         to:"To:",
         question:"Question:",
-        answer:"Answer:"
-    },
+        answer:"Answer:",
+        // refund policy
+        "refund.title": "Refund Policy",
+        "refund.full": "100% refund if cancelled at least 14 days before check-in.",
+        "refund.partial": "50% refund if cancelled between 7–13 days before check-in.",
+        "refund.none": "No refund if cancelled within 7 days of check-in.",
+        "refund.note": "Note: Check-in is at 3:00 PM on your arrival date. Refunds exclude any processing fees.",
+        },
     fr: {
         langBtn: 'En',
         navHome: 'Accueil',
@@ -159,7 +165,13 @@ const langData = {
         send_request: "Envoyer la demande",
         to: "À :",
         question: "Question :",
-        answer: "Réponse :"
+        answer: "Réponse :",
+        // refund policy
+        "refund.title": "Politique de Remboursement",
+        "refund.full": "Remboursement de 100% pour toute annulation au moins 14 jours avant l'arrivée.",
+        "refund.partial": "Remboursement de 50% pour toute annulation entre 7 et 13 jours avant l'arrivée.",
+        "refund.none": "Pas de remboursement pour toute annulation à moins de 7 jours de l'arrivée.",
+        "refund.note": "Remarque : L’enregistrement est à 15h00 le jour d’arrivée. Les frais de traitement ne sont pas remboursables."
     }
 };
 
